@@ -24,6 +24,7 @@ const EventListener = () => {
     const fetch = async () => {
       const sale_event = await contract.queryFilter(sale_filter);
       setSeles(sale_event[sale_event.length-1].args[0])
+      console.log("sales",sale_event);
     }
     if(window.ethereum) fetch();
   });
