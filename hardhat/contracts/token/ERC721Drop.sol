@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 *  1. name 
 *  2. symbol 
 */ 
-contract ERC721Drop is ERC721, Ownable {
+contract ERC721Drop is ERC721{
   using SafeMath for uint256;
 
   // マークルルート
@@ -19,7 +19,7 @@ contract ERC721Drop is ERC721, Ownable {
   // コントラクトの作成者
   address private _creator;
   // ベースURI
-  string private baseURI_ = 'https://ipfs.moralis.io:2053/ipfs/QmeXq9GPhPEaLwoocRjVS9PNwJJWwLiEb2dFWQuvpKYgZs/metadata/';
+  string private baseURI_ = 'https://ipfs.moralis.io:2053/ipfs/QmWewZkhV8zo2Pen44Y71notRyRR9sT7PoSReLA7QQrN4j/metadata/';
   // テストURI
   // string private _uri = "ipfs://QmeQAdSCQpTEskc1JYt9QrmR8PCSiGuFJPzCRjjBVWUWq9/metadata/{id}.json";
   // 供給量の上限
@@ -39,7 +39,7 @@ contract ERC721Drop is ERC721, Ownable {
     string memory _name,
     string memory _symbol
   ) ERC721(_name, _symbol){
-    MAX_AMOUNT_OF_MINT = 100;
+    MAX_AMOUNT_OF_MINT = 48;
     _creator = _msgSender();
     sales = false;
   }
@@ -66,7 +66,7 @@ contract ERC721Drop is ERC721, Ownable {
     bytes32[] calldata _merkleProof
   ) public {
     require(sales == true, "NFTs are not now on sale");
-    require(!whitelistClaimed[recipient], "Address already claimed");
+    require(!whitelistClaimed[_msgSender()], "Address already claimed");
     require(tokenSupply < MAX_AMOUNT_OF_MINT, "Max supply reached");
 
     bytes32 leaf = keccak256(abi.encodePacked(_msgSender()));
@@ -80,6 +80,24 @@ contract ERC721Drop is ERC721, Ownable {
     tokenSupply = tokenSupply.add(1);
 
     _mint(_msgSender(), _newTokenId);
+  }
+
+  /*
+  * @title mintByOwner
+  * @notice バルクミント用
+  * @param トークンの数
+  * @dev 
+  */
+  function mintByOwner(
+    uint256 _amount
+  )public virtual onlyCreatorOrAgent {
+    require(tokenSupply + _amount <= MAX_AMOUNT_OF_MINT, "Max supply reached");
+    for(uint256 i = 0; i < _amount; i++){
+      uint _newTokenId = tokenSupply;
+      tokenSupply = tokenSupply.add(1);
+
+      _mint(_msgSender(), _newTokenId);
+    }
   }
 
   /*
@@ -146,21 +164,4 @@ contract ERC721Drop is ERC721, Ownable {
     require(_exists(tokenId), "ERC721URIStorage: URI query for nonexistent token");
     return string(abi.encodePacked(baseURI_, Strings.toString(tokenId)));
   }
-
-//URI実装案２
-  /*
-  * @title setBaseURI
-  * @dev 
-  */
-  // function setURI(string memory uri_) public onlyCreatorOrAgent {
-  //   _uri = uri_;
-  // }
-  
-  /*
-  * @title setBaseURI
-  * @dev 
-  */
-  // function tokenURI(uint256 tokenId) public view returns (string memory) {
-  //   return _uri;
-  // }
 }

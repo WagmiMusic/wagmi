@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { useMoralis } from "react-moralis";
 
 import { ThemeProvider } from "@material-ui/core";
 import Header from "./components/Header";
 import Home from "./pages/HomePage";
 import MyRoutes from "./components/Routes";
 import theme from "./Theme";
+import { useMoralis } from "react-moralis";
 
 const App = () => {
 

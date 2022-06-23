@@ -1,6 +1,6 @@
 const assetElement = {
     name:'Hibikilla - "Bad Mind feat. Itaq"',
-    description:"",
+    description:"Produced by WAGMI Muisic",
     attributes: [
         {"trait_type":"Art Work","value":"Hibikilla"},
         {"trait_type":"Artist","value":"Hibikilla"},
@@ -13,7 +13,7 @@ const assetElement = {
     ]
 }
 
-const editionSize = 5;
+const editionSize = 48;
 
 module.exports = {
     assetElement,
