@@ -68,7 +68,7 @@ const ConfirmButton = ({toETH, tokenId, update}) => {
 
   const { native } = useMoralisWeb3Api();
 
-  const { isAuthenticated, account, chainId } = useMoralis();
+  const { authenticate, isAuthenticated, account, chainId } = useMoralis();
   const { switchNetwork } = useChain();
 
   const getContractAddress = () => {
@@ -108,7 +108,24 @@ const ConfirmButton = ({toETH, tokenId, update}) => {
     setToETH(toETH);
   }, [update, toETH])
 
-  const Confirm = () => {
+  const Confirm = async() => {
+
+    if(!isAuthenticated || !account){
+      alert("Please connect wallet!");
+      await authenticate({signingMessage: "Log in using Moralis"})
+      .then((user) => {
+        console.log("logged in user:", user);
+        if (user) {
+          console.log(user.get("ethAddress"));
+        } else {
+            console.log('no user');
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+    
     if(ToETH){
       if(chainId === "0x89" && account && isAuthenticated){
         // Fetch balanceOf

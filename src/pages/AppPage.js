@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Spacer from "../components/Spacer";
 import { useState } from "react";
 import ConfirmButton from "../moralis/Confirm";
+import AllowListButton from "../moralis/AllowlistButton";
 
 // const StyledInputLabel = styled(InputLabel)`
 //   color: #030303;
@@ -221,7 +222,7 @@ const AppPage = ({sales}) => {
       <Typography style={{fontSize: 60, marginBottom: 10, fontWeight:'bold'}}>
         Omnichain Sender
       </Typography>
-      <div className={classes.subtitle}>Let's Omnichain Send NFT!!</div>
+      <div className={classes.subtitle}>Let's Send Omnichain NFT!!</div>
       <Spacer height={20}></Spacer>
       <div className={classes.description}>このアプリケーションはRisin' To The Topを所有しているユーザーのみが使用できます</div>
       <div className={classes.description}>SendするNFTを所有しているチェーンに接続してください</div>

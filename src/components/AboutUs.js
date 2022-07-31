@@ -101,7 +101,7 @@ const AboutUs = () => {
     return <div className={classes.columnCenter}>
         <div className={classes.title}>AboutUs</div>
         <div className={classes.sub}>We are WAGMI music</div>
-        {/* <Profile
+        <Profile
             name="Hibikilla"
             imageURL="/image/hibikilla.png"
             title="artist"
@@ -109,8 +109,8 @@ const AboutUs = () => {
             twitter="https://twitter.com/hibikilla30"
             globe="https://linkco.re/2nnn3Ysv"
             />
-        <Spacer height={50}/> */}
-        <div className={classes.rowCenter}>
+        <Spacer height={50}/>
+        {/*<div className={classes.rowCenter}>
             <Profile
                 name="Hibikilla"
                 imageURL="/image/hibikilla.png"
@@ -129,7 +129,7 @@ const AboutUs = () => {
                 twitter="https://twitter.com/itaq_nasu"
                 instagram="https://www.instagram.com/itaq_nasu/"
             />
-        </div>
+        </div>*/}
         <Spacer height={100}/>
         <div className={classes.rowCenter}>
             <Profile
@@ -141,7 +141,7 @@ const AboutUs = () => {
             />
             <Profile
                 name="hal"
-                imageURL="/image/hal.png"
+                imageURL="/image/hal.PNG"
                 title="Frontend Engineer"
                 twitter="https://twitter.com/hal_bo_"
                 github="https://github.com/hal-bo"

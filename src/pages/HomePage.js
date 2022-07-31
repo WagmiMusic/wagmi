@@ -19,6 +19,12 @@ const useStyles = makeStyles({
         minWidth: '100vw',
         zIndex: -3
     },
+    back3: {
+        backgroundColor: '#F4E8D6',
+        minHeight: '40vh',
+        minWidth: '100vw',
+        zIndex: -3
+    },
     image: {
         margin: 10
     },
@@ -76,10 +82,10 @@ const useStyles = makeStyles({
         fontWeight:'bold',
     },
     title: {
-        fontSize: 40,
+        fontSize: 50,
         // fontFamily:'Lato',
         fontWeight:'bold',
-        marginLeft:20,
+        marginLeft:40,
         // height:80,
     },
     description: {
@@ -93,6 +99,7 @@ const useStyles = makeStyles({
         flexDirection: 'row',
     },
     info: {
+        width:"80%",
         padding:40,
         zIndex: 3,
         backgroundColor: 'rgba(255,255,255, 0.8)',
@@ -126,7 +133,7 @@ const HomePage = ({sales, inStock, maxSupply, minted}) => {
                     <img className={classes.img}
                     src="/image/record.png"/>
                     <img className={classes.iconimg}
-                    src="/image/bad_mind.png"/>
+                    src="/image/luna1.png"/>
                     <div className={classes.circle}></div>
                 </div>
                 <div className={classes.info}>
@@ -138,7 +145,7 @@ const HomePage = ({sales, inStock, maxSupply, minted}) => {
                         </div>
                     </div>
                     <div className={classes.title}>
-                            bad mind feat. Itaq
+                            luna
                     </div>
                     <Grid item xs={12}>
                         <SalesInfo sales={sales} supply={inStock}></SalesInfo>
@@ -154,6 +161,9 @@ const HomePage = ({sales, inStock, maxSupply, minted}) => {
             <AboutUs />
         </Grid>
         <Spacer height={100}/>
+        </div>
+        <div className={classes.back3}>
+
         </div>
     </>;
 };

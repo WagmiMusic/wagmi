@@ -273,7 +273,7 @@ describe("main", () => {
             // second withdrawal by owner
             claimingValue = await WGM721.claimable();
             tx = await WGM721.withdraw(owner.address, claimingValue);
-            await tx.wait()
+            await tx.wait();
             let claimedValue = await WGM721.totalPayed();
 
             contractBalance = await provider.getBalance(WGM721.address);

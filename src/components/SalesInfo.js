@@ -56,7 +56,7 @@ const useStyles = makeStyles({
     },
     description: {
         fontWeight:'bold',
-        marginLeft:20,
+        marginLeft:30,
     },
     buttonMargin: {
         margin: 10,
@@ -115,19 +115,19 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
 };
 
 /*
-*  sales == 0 => PreRelease
-*  sales == 1 => FreeMint
+*  sales == 0 => PreSale
+*  sales == 1 => PublicSale
 *  sales == 2 => Suspended
 */
 const SalesInfo = ({sales, supply}) => {
     const classes = useStyles();
-    if(!sales){
+    if(sales === 2){
         return <div>
         <div className={classes.description}>
             New Single will be released soon . . . !!
         </div>
         <Countdown
-            date={new Date('July 15, 2022 22:00:00')}
+            date={new Date('August 19, 2022 22:00:00')}
             renderer={renderer}
         >
         </Countdown>

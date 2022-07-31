@@ -40,7 +40,7 @@ const ConnectWalletButton = ({color = '#333'}) => {
     const [address, setAddress] = useState();
 
   useEffect(() => {
-    if(chainId === "0x1" || chainId === "0x89" || chainId === null){
+    if(chainId === "0x1" || chainId === "0x89" || chainId === "0x5" || chainId === null){
     }else{
       alert("The system will change your network to Ethereum");
       switchNetwork("0x1");
@@ -50,7 +50,6 @@ const ConnectWalletButton = ({color = '#333'}) => {
 
   const logIn = async () => {
     if (!isAuthenticated || !account) {
-
       await authenticate({signingMessage: "Log in using Moralis"})
         .then((user) => {
           console.log("logged in user:", user);

@@ -13,17 +13,18 @@ const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 const maxSupply = process.env.REACT_APP_MAX_SUPPLY;
 
 const options = {
-  chain: "0x1",
+  chain: "0x5",
   address: contractAddress,
-  function_name: "tokenSupply",
-  abi: [{"inputs":[],"name":"tokenSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}],
-  params: {}
+  function_name: "totalSupply",
+  abi: [{"inputs":[{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}],
+  params: {_tokenId:3}
 };
 
 let web3Provider, contract, sale_filter;
 if(window.ethereum){
   web3Provider = new ethers.providers.Web3Provider(window.ethereum);
   contract = new ethers.Contract(contractAddress, contractAbi, web3Provider);
+  console.log(contract);
   sale_filter = contract.filters.NowOnSale(null);
 }
 
@@ -33,13 +34,13 @@ const App = () => {
     useMoralis();
 
   /*
-  *  sales == 0 => PreRelease
-  *  sales == 1 => FreeMint
-  *  sales == 2 => Suspended
+  *  sales == 0 => presale
+  *  sales == 1 => pulicsale
+  *  sales == 2 => suspended
   */
   const [sales, setSeles] = useState();
   const [supply, setSupply] = useState(true);
-  const { fetch, data, error, isLoading } = useMoralisWeb3ApiCall(native.runContractFunction,{...options});
+  const { fetch, data } = useMoralisWeb3ApiCall(native.runContractFunction,{...options});
 
   useEffect(() => {
     const connectorId = window.localStorage.getItem("connectorId");
@@ -51,14 +52,12 @@ const App = () => {
   useEffect(() => {
     const fetchEvent = async () => {
     const sale_event = await contract.queryFilter(sale_filter);
-    setSeles(sale_event[sale_event.length-1].args[0])
-    }
-    const fetchSupply = async () => {
-    fetch();
+    // setSeles(sale_event[sale_event.length-1].args[0])
+    setSeles(2);
     }
     if(window.ethereum) fetchEvent();
-    fetchSupply();
-  }, [account]);
+    fetch();
+  }, [account, fetch]);
 
   useEffect(() => {
     if(data===`${maxSupply}`){

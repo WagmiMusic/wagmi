@@ -3,9 +3,9 @@ import { FormControlLabel, Button, Card, Checkbox, Grid, Hidden, makeStyles } fr
 import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePause, faCirclePlay } from "@fortawesome/free-solid-svg-icons";
-import WLMintButton from "../moralis/MintButton";
+import { WLMintButton, MintButton } from "../moralis/MintButton";
 import Spacer from "./Spacer";
-import { useMoralis, useMoralisQuery } from "react-moralis";
+import { useMoralis, useMoralisQuery, useChain, useMoralisWeb3Api, useMoralisWeb3ApiCall } from "react-moralis";
 import { MusicContext } from "../provider/MusicProvider";
 import keccak256 from "keccak256";
 import { Buffer } from 'buffer';
@@ -105,12 +105,13 @@ const useStyles = makeStyles({
     }
 });
 
-const MintButtons = ({sales, checked, inStock}) => {
+const MintButtons = ({tokenId, sales=1, checked, inStock}) => {
     const classes = useStyles();
 
     const [valid, setValid] = useState(false);
 
-    const { account } = useMoralis();
+    const { authenticate, isAuthenticated, account, chainId } = useMoralis();
+    const { switchNetwork } = useChain();
     
     const { data } = useMoralisQuery(
         "AllowList",
@@ -122,109 +123,165 @@ const MintButtons = ({sales, checked, inStock}) => {
         if(data.length >= 1){
             let wlarray = data[data.length-1].attributes.allowlist;
             let wlarray_lc = wlarray.map(addr => addr.toLowerCase());
-            if(wlarray_lc.includes(`${account}`)){
+            if(wlarray_lc.includes(`${account.toLowerCase()}`)){
                 console.log("You are whitelisted account");
                 setValid(true);
             }else{
+                // console.log(wlarray_lc);
+                // console.log(testaccount.toLowerCase());
                 console.log("You aren't whitelisted account");
             }
         }
-    }, [data]);
+    }, [data, account]);
 
-    if(checked && valid && data && inStock){
+    const handleError = async () => {
+        if(!isAuthenticated || !account){
+            alert("Please connect wallet!");
+            await authenticate({signingMessage: "Log in using Moralis"})
+            .then((user) => {
+              console.log("logged in user:", user);
+              if (user) {
+                console.log(user.get("ethAddress"));
+              } else {
+                  console.log('no user');
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
+        if(chainId!=="0x1" && chainId!=="0x5"){
+            alert("The system will change your network to Ethereum.");
+            switchNetwork("0x1");
+        }else{
+            if(!checked){
+                alert("You cannot mint because checkBox is not checked!")
+            }else if(!valid && sales===0){
+                alert("You cannot mint because you are not whitelisted!")
+            }else if(!inStock){
+                alert("NFTs are out of stock!")
+            }else{
+                alert("Something is wrong! Please contact WAGMI Music")
+            }
+        }
+    }
+    if((chainId==="0x1" || chainId==="0x5") && checked && inStock){
         /*
-        *  sales == 0 => PreRelease
-        *  sales == 1 => FreeMint
-        *  sales == 2 => Suspended
+        *  sale == 0 => preSale
+        *  sale == 1 => publicSale
+        *  sale == 2 => Suspended
         */
         switch(sales){
-            case 0:
-                return <Button className={classes.button} style={{backgroundColor: "#716E63"}} onClick={()=>{alert("mint sale has yet to start!", sales)}} >Mint</Button>
-            case 1:
+            case "0":
+                if(valid && data){
+                    return <div>
+                    <WLMintButton data={data} tokenId={tokenId}/>
+                    </div>
+                }else{
+                    return <Button className={classes.button} style={{backgroundColor: "#716E63"}} onClick={handleError} >Mint</Button>
+                }
+            case "1":
                 return <div>
-                <WLMintButton data={data}/>
+                <MintButton tokenId={tokenId}/>
                 </div>
-            case 2:
+            case "2":
                 return <Button className={classes.button} style={{backgroundColor: "#716E63"}} onClick={()=>{alert("Mint sale is suspended!")}} >Mint</Button>
             default:
                 return <Button className={classes.button} style={{backgroundColor: "#716E63"}} onClick={()=>{alert("mint sale has yet to start!", sales)}} >Mint</Button>
         }
-        // /*
-        // *  sales == 0 => Presale
-        // *  sales == 1 => PublicSale
-        // *  sales == 2 => Suspended
-        // */
-        // switch(sales){
-        //     case 0:
-        //         return <div>
-        //         <WLMintButton data={data}/>
-        //         </div>
-        //     case 1:
-        //         return <div>
-        //         <MintButton/>
-        //         </div>
-        //     case 2:
-        //         return <Button className={classes.button} style={{backgroundColor: "#716E63"}} onClick={()=>{alert("Mint sale is suspended!")}} >Mint</Button>
-        //     default:
-        //         return <Button className={classes.button} style={{backgroundColor: "#716E63"}} onClick={()=>{alert("mint sale has yet to start!", sales)}} >Mint</Button>
-        // }
     }else{
-        return <Button className={classes.button} style={{backgroundColor: "#716E63"}} onClick={()=>{alert("You cannot mint because checkBox is not checked or you are not whitelisted!")}} >Mint</Button>
+        return <Button className={classes.button} style={{backgroundColor: "#716E63"}} onClick={handleError} >Mint</Button>
     }
 }
 
-const MusicCard = ({artist = "hibikilla", title = "BAD MIND", sales, valid, inStock}) => {
+const MusicCard = ({artist = "hibikilla", title = "LUNA",id = 1,baseId=2, inStock}) => {
+    const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+    const tokenId = baseId+id;
+    // console.log("tokenId",tokenId)
+    const options = {
+        chain: "0x5",
+        address: contractAddress,
+        function_name: "sales",
+        abi: [{"inputs":[{"internalType":"uint256","name":"para","type":"uint256"}],"name":"sales","outputs":[{"internalType":"enum WAGMIMusicToken1155.saletate","name":"","type":"uint8"}],"stateMutability":"view","type":"function"}],
+        params: {para:tokenId}
+    };
+
     const classes = useStyles();
-    const { isPlaying, onPlay, onStop } = useContext(MusicContext);
+    const { musicPlaying, onPlay, onStop } = useContext(MusicContext);
 
     const [checked, setChecked] = useState();
+    const [sales, setSales] = useState(1);
+
+    const { account } = useMoralis();
+    const { native } = useMoralisWeb3Api();
+    const { fetch, data, error, isLoading } = useMoralisWeb3ApiCall(native.runContractFunction,{...options});
 
     const handleChange = (e) => {
         setChecked(e.target.checked)
     }
 
-    return <div>
-            <Card raised className={classes.card}>
-            <div className={classes.graffiti}>FreeMint !!</div>
-                <div className={classes.image}>
-                    <img className={classes.img}
-                    src="/image/bad_mind.png"/>
-                </div>
-                <div className={classes.info}>
-                    <div className={classes.base}>
-                        <Button onClick={() => {
-                            if (isPlaying) {
-                                onStop();
-                            } else {
-                                onPlay();
-                            }
-                        }}>
-                            {isPlaying ?
-                                <FontAwesomeIcon className={classes.icon} icon={faCirclePause} /> : 
-                                <FontAwesomeIcon className={classes.icon} icon={faCirclePlay} />
-                            }
-                        </Button>
-                        <div className={classes.transparentBlock}></div>
-                        <div>
-                            <div style={{fontSize:24}}>{artist}</div>
-                            <div style={{fontSize:36, fontWeight: 'bold'}}>{title}</div>
-                        </div>
-                    </div>
-                    <Spacer height={10}/>
-                    <div className={classes.form}>
-                        <Checkbox 
-                            defaultChecked={false}
-                            color="secondary"
-                            onChange={handleChange}
-                        />
-                        <div className={classes.formContent}>I acknowledge that I have read and understood our policy prior to buying.</div>
-                    </div>
-                    <Spacer height={20}/>
-                    <MintButtons checked={checked} sales={sales} inStock={inStock}/>
-                </div>
-            </Card>
+    const handleSrc = (_id) => {
+        return(`/image/luna${_id}.png`);
+    }
 
-    </div>;
+    useEffect(()=>{
+        fetch();
+    }, [account,fetch])
+
+    useEffect(() => {
+        if(data){
+            setSales(data)
+        }
+    }, [data])
+
+    if(sales === "2"){
+        return <div></div>
+    }else{
+        return <div>
+                <Card raised className={classes.card}>
+                {/* <div className={classes.graffiti}>FreeMint !!</div> */}
+                    <div className={classes.image}>
+                        <img className={classes.img}
+                        src={handleSrc(id)}/>
+                    </div>
+                    <div className={classes.info}>
+                        <div className={classes.base}>
+                            <Button onClick={() => {
+                                if (musicPlaying === id) {
+                                    onStop(id);
+                                } else {
+                                    onPlay(id);
+                                }
+                            }}>
+                                {musicPlaying === id ?
+                                    <FontAwesomeIcon className={classes.icon} icon={faCirclePause} /> : 
+                                    <FontAwesomeIcon className={classes.icon} icon={faCirclePlay} />
+                                }
+                            </Button>
+                            <div className={classes.transparentBlock}></div>
+                            <div>
+                                <div style={{fontSize:24}}>{artist}</div>
+                                <div style={{fontSize:28, fontWeight: 'bold'}}>{title}</div>
+                            </div>
+                        </div>
+                        <Spacer height={10}/>
+                        <div className={classes.form}>
+                            <Checkbox 
+                                defaultChecked={false}
+                                color="secondary"
+                                onChange={handleChange}
+                            />
+                            <div className={classes.formContent}>I acknowledge that I have read and understood our policy prior to buying.</div>
+                        </div>
+                        <Spacer height={20}/>
+                        <MintButtons tokenId={tokenId} checked={checked} sales={sales} inStock={inStock}/>
+                    </div>
+                </Card>
+
+        </div>;
+    }
+
+    
 };
 
 export default MusicCard;

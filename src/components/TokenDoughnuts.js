@@ -250,7 +250,7 @@ const SalesLabels = ({sales}) => {
         <StyledDoughnuts
           data={graphdata_pre} 
           options={doughnutOptions} />
-        <SalesLabel day="7/10" label="Site Release" progress="false" degree1="-45" degree2="45"/>
+        <SalesLabel day="7/14" label="Site Release" progress="false" degree1="-45" degree2="45"/>
         <SalesLabel day="7/15" label="Mint Sale" progress="false" degree1="0" degree2="0"/>
         <SalesLabel day="" label="End of Sale" progress="false" degree1="45" degree2="-45"/>
       </div>
@@ -290,7 +290,7 @@ const TokenDoughnuts = ({sales, supply, minted}) => {
         <div className={classes.tokenSupply}>
           <div className={classes.sbold}>total minted</div>
           <div className={classes.tokenAmount}>
-            <div className={classes.bbold}>{minted}</div>
+            <div className={classes.bbold}>{minted ?minted :0}</div>
             <div className={classes.thin}>/{supply}</div>
             <div className={classes.bbold}>tokens</div>
           </div>

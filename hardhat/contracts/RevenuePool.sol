@@ -15,7 +15,7 @@ contract RevenuePool is Ownable, IRevenuePool{
     * @param ステークホルダーのアドレス
     * @param 収益分配率(百分率)
     */
-    function setShare(address[] calldata _stakeholders, uint[] calldata _share) public virtual override onlyOwner {
+    function setShare(address payable [] calldata _stakeholders, uint[] calldata _share) public virtual override onlyOwner {
         for(uint256 i = 0; i < _stakeholders.length; i++){
             share[_stakeholders[i]] = _share[i];
         }

@@ -30,9 +30,11 @@ const useStyles = makeStyles({
         "box-sizing": "border-box"
     },
     customIcon: {
+        height: 40,
+        backgroundColor: 'rgba(255,255,255,0.5)',
         fontSize: 16,
         fontFamily: 'Lato',
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     },
     wallet: {
         margin: 100,
@@ -55,7 +57,6 @@ const useStyles = makeStyles({
 });
 const Header = ({color, subColor, sales}) => {
     const classes = useStyles();
-    console.log(!sales);
     return <div>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" className={classes.headerBar}>
@@ -84,7 +85,7 @@ const Header = ({color, subColor, sales}) => {
                           Home
                         </Button>
                     </Grid>
-                    {!sales
+                    {sales == 2
                         ?<div></div>
                         :<Grid item className={classes.buttonMargin}>
                         <Button 
