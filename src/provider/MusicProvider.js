@@ -8,7 +8,7 @@ export const MusicProvider = ({children}) =>  {
     const [musicPlaying, setMusicPlaying] = useState();
     const [volume, setVolume] = useState(1);
     const [title, setTitle] = useState("Hibikilla - LUNA -");
-    const [play, {stop, pause}] = useSound(`/music/luna1.wav`);
+    const [play, {stop, pause}] = useSound('/music/luna1.wav');
 
     const handleTitle = (id) => {
         switch(id){

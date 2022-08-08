@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Spacer from "../components/Spacer";
 import React from "react";
 import TokenDoughnuts from "../components/TokenDoughnuts";
+import Footer from "../components/Footer";
 
 const useStyles = makeStyles({
     back: {
@@ -155,16 +156,15 @@ const HomePage = ({sales, inStock, maxSupply, minted}) => {
         </div>
         </div>
         <div className={classes.back2}>
+        <Spacer height={100}/>
         <TokenDoughnuts sales = {sales} supply={maxSupply} minted={minted}></TokenDoughnuts>
         <Spacer height={20}/>
         <Grid container justifyContent="center">
-            <AboutUs />
+            <AboutUs/>
         </Grid>
         <Spacer height={100}/>
         </div>
-        <div className={classes.back3}>
-
-        </div>
+        <Footer/>
     </>;
 };
 

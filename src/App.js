@@ -24,7 +24,7 @@ let web3Provider, contract, sale_filter;
 if(window.ethereum){
   web3Provider = new ethers.providers.Web3Provider(window.ethereum);
   contract = new ethers.Contract(contractAddress, contractAbi, web3Provider);
-  console.log(contract);
+  // console.log(contract);
   sale_filter = contract.filters.NowOnSale(null);
 }
 

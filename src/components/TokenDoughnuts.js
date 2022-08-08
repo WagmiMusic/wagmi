@@ -241,9 +241,9 @@ const SalesLabels = ({sales}) => {
         <StyledDoughnuts
           data={graphdata_end} 
           options={doughnutOptions} />
-        <SalesLabel day="7/10" label="Site Release" progress="true" degree1="-45" degree2="45"/>
-        <SalesLabel day="7/15" label="Mint Sale" progress="true" degree1="0" degree2="0"/>
-        <SalesLabel day="" label="End of Sale" progress="true" degree1="45" degree2="-45"/>
+        <SalesLabel day="8/19" label="Presale" progress="true" degree1="-45" degree2="45"/>
+        <SalesLabel day="8/20" label="Public Sale" progress="true" degree1="0" degree2="0"/>
+        <SalesLabel day="9/26" label="End of Sale" progress="true" degree1="45" degree2="-45"/>
       </div>
     default:
         return <div>

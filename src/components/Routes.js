@@ -2,11 +2,17 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import MintPage from '../pages/MintPage';
 import AppPage from '../pages/AppPage';
+import OmnichainSender from '../pages/omnichainSender';
+import WagmiCollection from '../pages/wagmiCollection';
+import TokenExchanger from '../pages/tokenExchanger';
 
 export const Path = {
     home: "/",
     mint: "/mint",
-    app: "/app"
+    app: "/app",
+    omni: "/app/omni",
+    album: "/app/album",
+    exchange: "/app/exchange"
 };
 
 const MyRoutes = ({sales, inStock, maxSupply, minted}) => {
@@ -15,7 +21,10 @@ const MyRoutes = ({sales, inStock, maxSupply, minted}) => {
             <Routes>
 `               <Route path={Path.home} element={<HomePage  sales={sales} inStock={inStock} maxSupply={maxSupply} minted={minted}/>} />
                 <Route path={Path.mint} element={<MintPage sales={sales} inStock={inStock} maxSupply={maxSupply} minted={minted}/>} />
-                <Route path={Path.app} element={<AppPage sales={sales} inStock={inStock} maxSupply={maxSupply} minted={minted}/>} />`
+                <Route path={Path.app} element={<AppPage sales={sales} inStock={inStock} maxSupply={maxSupply} minted={minted}/>} />
+                <Route path={Path.omni} element={<OmnichainSender sales={sales}/>} />
+                <Route path={Path.album} element={<WagmiCollection sales={sales}/>} />
+                <Route path={Path.exchange} element={<TokenExchanger/>} />`
             </Routes>
         </BrowserRouter>
     </>

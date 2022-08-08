@@ -85,9 +85,8 @@ const Header = ({color, subColor, sales}) => {
                           Home
                         </Button>
                     </Grid>
-                    {sales == 2
-                        ?<div></div>
-                        :<Grid item className={classes.buttonMargin}>
+                    {sales===1||sales===0
+                        ?<Grid item className={classes.buttonMargin}>
                         <Button 
                             href={Path.mint}
                             className={classes.customButton}
@@ -96,6 +95,7 @@ const Header = ({color, subColor, sales}) => {
                           Mint
                         </Button>
                         </Grid>
+                        :<div></div>
                     }
                     <Grid item className={classes.buttonMargin}>
                         <Button 
