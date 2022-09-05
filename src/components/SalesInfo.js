@@ -23,8 +23,7 @@ const useStyles = makeStyles({
         alignItems: 'center'
     },
     countCol: {
-        width: 120,
-        height: 140,
+        width: "20%",
         margin: 10,
         display: 'flex',
         justifyContent: 'center',
@@ -33,7 +32,6 @@ const useStyles = makeStyles({
         backgroundColor: '#030303',
         boxShadow: '0px 2px 5px 0px rgba(0, 0, 0, 0.8)',
         borderRadius: "15%",
-        fontSize: 30,
         color: '#F2EBE4',
     },
     colon: {
@@ -46,13 +44,17 @@ const useStyles = makeStyles({
         fontFamily: 'Lato',
     },
     number: {
-        fontSize: 60,
+        fontSize: "300%",
         fontFamily: 'Lato',
+        marginTop:"10%",
     },
     unit: {
-        fontSize: 20,
+        fontSize: "100%",
         fontFamily: 'Lato',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginBottom:"15%",
+        marginLeft:"4vw",
+        marginRight:"4vw",
     },
     description: {
         fontWeight:'bold',
@@ -115,24 +117,29 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
 };
 
 /*
-*  sales == 0 => PreSale
-*  sales == 1 => PublicSale
-*  sales == 2 => Suspended
+*  sales == 0 => prepared
+*  sales == 1 => presale
+*  sales == 2 => pulicsale
+*  sales == 3 => suspended
 */
-const SalesInfo = ({sales, supply}) => {
+const SalesInfo = ({sales="0", supply}) => {
     const classes = useStyles();
-    if(sales === 2){
-        return <div>
-        <div className={classes.description}>
-            New Single will be released soon . . . !!
+    if(sales === "3"){
+        return <div className={classes.columnCenter}>
+        <div className={classes.incite}>
+        Mint sale is finished !!
         </div>
-        <Countdown
-            date={new Date('August 19, 2022 22:00:00')}
-            renderer={renderer}
-        >
-        </Countdown>
+        <Grid item className={classes.buttonMargin}>
+            <Button 
+                href="https://opensea.io/collection/wagmimusic"
+                target="_blank"
+                className={classes.customButton}
+                >
+                Go Opensea
+            </Button>
+        </Grid>
         </div>;
-    } else if(supply === true && sales === 1){
+    } else if(sales === "1" || sales === "2"){
         return <div className={classes.columnCenter}>
         <div className={classes.incite}>
         Mint is now available !!
@@ -147,19 +154,15 @@ const SalesInfo = ({sales, supply}) => {
         </Grid>
         </div>;
     } else {
-        return <div className={classes.columnCenter}>
-        <div className={classes.incite}>
-        Mint sale is finished !!
+        return <div>
+        <div className={classes.description}>
+            New Single will be released soon . . . !!
         </div>
-        <Grid item className={classes.buttonMargin}>
-            <Button 
-                href="https://opensea.io/collection/wagmimusic"
-                target="_blank"
-                className={classes.customButton}
-                >
-                Go Opensea
-            </Button>
-        </Grid>
+        <Countdown
+            date={new Date('August 19, 2022 21:00:00')}
+            renderer={renderer}
+        >
+        </Countdown>
         </div>;
     };
 };

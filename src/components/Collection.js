@@ -80,7 +80,11 @@ const Collection = ({data}) => {
 
   const fetchMetadata = async (uri) => {
     if(uri){
-      fetch(uri)
+      fetch(
+        uri,
+        // {mode: 'cors',
+        // credentials: 'include'}
+      )
     .then(res => res.json())
     .then((rows) => {
         setName(rows.name);

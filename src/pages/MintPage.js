@@ -112,13 +112,13 @@ const MintPage = ({sales, inStock, maxSupply, minted}) => {
             <Spacer height={90}/>
             <div className={classes.pageClass}>
                 <Grid item>
-                    <MusicCard title={"LUNA - Original"} artist={"hibikilla"} id={1} sales={sales} inStock={inStock}/>
+                    <MusicCard title={"LUNA - Original"} artist={"hibikilla"} id={1} sales={sales} inStock={inStock[0]}/>
                     <Spacer height={50}/>
-                    <MusicCard title={"LUNA - Special"} artist={"hibikilla"} id={2} sales={sales} inStock={inStock}/>
+                    <MusicCard title={"LUNA - Special"} artist={"hibikilla"} id={2} sales={sales} inStock={inStock[1]}/>
                     <Spacer height={50}/>
-                    <MusicCard title={"LUNA - Instrumental"} artist={"hibikilla"} id={3} sales={sales} inStock={inStock}/>
+                    <MusicCard title={"LUNA - Instrumental"} artist={"hibikilla"} id={3} sales={sales} inStock={inStock[2]}/>
                     <Spacer height={50}/>
-                    <MusicCard title={"LUNA - Acappella"} artist={"hibikilla"} id={4} sales={sales} inStock={inStock}/>
+                    <MusicCard title={"LUNA - Acappella"} artist={"hibikilla"} id={4} sales={sales} inStock={inStock[3]}/>
                     <Spacer height={150}/>
                 </Grid>
             </div>

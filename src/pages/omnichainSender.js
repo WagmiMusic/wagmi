@@ -2,7 +2,7 @@ import { Button, Typography, Card, makeStyles, InputLabel, MenuItem, FormControl
 import Header from "../components/Header";
 import Spacer from "../components/Spacer";
 import { useState } from "react";
-import ConfirmButton from "../moralis/Confirm";
+import { ConfirmButton } from "../moralis/Confirm";
 import AllowListButton from "../moralis/AllowlistButton";
 
 // const StyledInputLabel = styled(InputLabel)`
@@ -14,7 +14,6 @@ const useStyles = makeStyles({
     backgroundColor: '#FFFAF3',
     minHeight: '155vh',
     minWidth: '100vw',
-    position: 'absolute',
     zIndex: -1
   },
   image: {
@@ -217,7 +216,6 @@ const OmnichainSender = ({sales}) => {
   <div className={classes.back}>
     <Header color="#030303" subColor="white" sales={sales}/>
         <Spacer height={150}></Spacer>
-        {/* <AllowListButton/> */}
     <div className={classes.columnCenter}>
       <Typography style={{fontSize: 60, marginBottom: 10, fontWeight:'bold'}}>
         Omnichain Sender

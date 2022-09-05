@@ -4,6 +4,7 @@ import Spacer from "../components/Spacer";
 import { Path } from '../components/Routes';
 import { useMoralis } from "react-moralis";
 import Footer from "../components/Footer";
+import AllowListButton from "../moralis/AllowlistButton";
 
 const useStyles = makeStyles({
   back: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles({
     zIndex: -1
   },
   appField: {
-    width:"90vw",
+    width:"92vw",
   },
   columnCenter: {
     display: 'flex',
@@ -30,8 +31,8 @@ const useStyles = makeStyles({
     flexWrap:'wrap'
   },
   appBox: {
-    width:"22vw",
-    height: "28vw",
+    width:300,
+    height:380,
     margin: "1vw",
     backgroundColor:"#030303",
     borderRadius: "1vw",
@@ -75,8 +76,8 @@ const useStyles = makeStyles({
   frame: {
     borderTopRightRadius: "1vw",
     borderTopLeftRadius: "1vw",
-    width:"22vw",
-    height:"22vw",
+    width:300,
+    height:300,
     position:'relative',
   },
   description: {
@@ -108,6 +109,7 @@ const AppPage = ({sales}) => {
     <div className={classes.columnCenter}>
     <div className={classes.appField}>
       <div className={classes.rowCenter}>
+        {/* <AllowListButton/> */}
         <Card raised className={classes.appBox}>
           <div className={classes.frame}>
             <img className={classes.img}
@@ -167,6 +169,22 @@ const AppPage = ({sales}) => {
             <div className={classes.description}>
               <div className={classes.aName}>Token Exchanger</div>
               <div className={classes.aDesc}>旧規格トークンの引換を行います</div>
+            </div>
+            <div className={classes.appInvalid}>
+              Coming Soon...
+            </div>
+          </div>
+        </Card>
+        <Card raised className={classes.appBox}>
+          <div className={classes.frame}>
+            <img className={classes.img}
+            src={`/image/wagmi2.png`}/>
+            <div className={classes.fade}></div>
+          </div>
+          <div className={classes.columnCenter}>
+            <div className={classes.description}>
+              <div className={classes.aName}>Token Staking</div>
+              <div className={classes.aDesc}>ステーキングで新しいNFTを獲得します</div>
             </div>
             <div className={classes.appInvalid}>
               Coming Soon...

@@ -4,13 +4,16 @@ import Spacer from "../components/Spacer";
 import Collection from "../components/Collection";
 import { useEffect, useState } from "react";
 import { useMoralis, useMoralisWeb3Api } from "react-moralis";
+import { MoralisProvider } from 'react-moralis';
+
+const APP_ID = process.env.REACT_APP_MORALIS_APPLICATION_ID;
+const SERVER_URL = process.env.REACT_APP_MORALIS_SERVER_URL;
 
 const useStyles = makeStyles({
   back: {
     backgroundColor: '#FFFAF3',
-    minHeight: '155vh',
+    minHeight: '100vh',
     minWidth: '100vw',
-    position: 'absolute',
     zIndex: -1
   },
   appField: {
@@ -92,19 +95,39 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     flexWrap:'wrap'
   },
+  display: {
+    width:"50vw",
+    fontSize:20,
+    color:"#4A434D",
+    textAlign: 'center'
+  }
 })
 let tokenArray = [];
+let luna = true;
+let badmind = true;
+let rtt = true;
 
 const WagmiCollection = ({sales}) => {
   const classes = useStyles();
   const Web3Api = useMoralisWeb3Api();
   const [update,setUpdate]=useState(false)
 
+  const { native } = useMoralisWeb3Api();
+  const { isWeb3Enabled, enableWeb3, isAuthenticated, account, isWeb3EnableLoading, Moralis } =
+    useMoralis();
+
+  useEffect(() => {
+  const connectorId = window.localStorage.getItem("connectorId");
+  if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
+    enableWeb3({ provider: connectorId });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, isWeb3Enabled]);
+
   const fetchToken = async () => {
     // Luna Token
     const options = {
       chain: "0x1",
-      address: "0xD81Cd16ddcdeD56bf1229DC65A5A46391fa9C17B",
+      address: account,
       token_address: "0xa86a7046800c57236B61d1587f4aBE9B38Ab6F5d",
     };
     const token = await Web3Api.account.getNFTsForContract(options);
@@ -118,28 +141,75 @@ const WagmiCollection = ({sales}) => {
     })
   }
 
+  const fetchLunaToken = async () => {
+    // Luna Token
+    const options = {
+      chain: "0x1",
+      address: account,
+      token_address: "0xd91A3ad7C4e093E1A934481cDC6755221E0c6ac4",
+    };
+    const token = await Web3Api.account.getNFTsForContract(options);
+    // console.log("lunatoken",token);
+    // console.log("lunatokenUri",token.result[0].token_uri);
+    setUpdate(update?false:true)
+    token.result.forEach((res, i) => {
+      tokenArray.push([res.token_id, res.amount, res.token_uri]);
+      // console.log("umm",tokenArray);
+      setUpdate(update?false:true)
+    })
+  }
+
   const fetchLegacyToken = async () => {
     // RTT Token
     const options = {
       chain: "polygon",
-      address: "0x3BF9f6AC578e0dec6121c72c4AdC9735c051DB03",
+      address: account,
       token_address: "0xb4fa9FEe7B4f359a4C805b27932bca017D78bfeb",
     };
     const token = await Web3Api.account.getNFTsForContract(options);
-    // console.log("legacy",token.result);
+    // console.log("legacy",token);
     // console.log("legacyUri",token.result[0].token_uri);
     // setUpdate(update?false:true)
     token.result.forEach((res, i) => {
       tokenArray.push([res.token_id, res.amount, res.token_uri]);
       // console.log("umm",tokenArray);
-      setUpdate(update+1)
+      // setUpdate(update+1)
     })
   }
 
   useEffect(()=>{
-    fetchLegacyToken();
-    fetchToken();
+    if(luna){
+      fetchLunaToken();
+      luna = false;
+    }
+    if(badmind){
+      fetchToken();
+      badmind = false;
+    }
+    if(rtt){
+      fetchLegacyToken();
+      rtt = false;
+    }
   },[])
+
+  // useEffect(()=>{
+  //   fetchLegacyToken();
+  // },[account])
+
+  // useEffect(()=>{
+  //   fetchLunaToken();
+  // },[account])
+
+  // useEffect(()=>{
+  //   fetchToken();
+  // },[account])
+
+  useEffect(() => {
+    const connectorId = window.localStorage.getItem("connectorId");
+    if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
+      enableWeb3({ provider: connectorId });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, isWeb3Enabled]);
 
   // useEffect(()=>{
   //   console.log("detect array",tokenArray.length)
@@ -149,22 +219,37 @@ const WagmiCollection = ({sales}) => {
   // useEffect(()=>{
   //   console.log("update")
   // },[update])
-
-  return <>
-  <div className={classes.back}>
-    <Header color="#030303" subColor="white" sales={sales}/>
-    <Spacer height={150}></Spacer>
-    <div>
-    <div className={classes.columnCenter}>
-      <div className={classes.appField}>
-        <div className={classes.rowLeft}>
-          {tokenArray.map((data, i) => <Collection key={i} data={data}/>)}
+  if(tokenArray.length){
+    return <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
+    <div className={classes.back}>
+      <Header color="#030303" subColor="white" sales={sales}/>
+      <Spacer height={150}></Spacer>
+      <div>
+        <div className={classes.columnCenter}>
+          <div className={classes.appField}>
+            <div className={classes.rowLeft}>
+              {tokenArray.map((data, i) => <Collection key={i} data={data}/>)}
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  </div>
-  </>
+    </MoralisProvider>;
+  }else{
+    return <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
+    <div className={classes.back}>
+      <Header color="#030303" subColor="white" sales={sales}/>
+      <div>
+        <div className={classes.columnCenter}>
+        <Spacer height={"48vh"}></Spacer>
+          <div className={classes.display}>
+            There is no nft to display... purchase wagmi nft!
+          </div>
+        </div>
+      </div>
+    </div>
+    </MoralisProvider>;
+  }
 }
 
 export default WagmiCollection;

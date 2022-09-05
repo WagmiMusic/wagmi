@@ -68,47 +68,18 @@ const Error = ({error}) => {
   }
 }
 
-const handleFee = (sale, id)=>{
-  const toWei = 1000000000000000000;
-  if(sale === "presale"){
-    switch(id){
-      case 3:
-        return(0.005 * toWei)
-      case 4:
-        return(0.3 * toWei)
-      case 5:
-        return(0.01 * toWei)
-      case 6:
-        return(0.01 * toWei)
-      default:
-        return(0)
-    }
-  }else if(sale === "public sale"){
-    switch(id){
-      case 3:
-        return(0.01 * toWei)
-      case 4:
-        return(0.3 * toWei)
-      case 5:
-        return(0.01 * toWei)
-      case 6:
-        return(0.01 * toWei)
-      default:
-        return(0)
-    }
-  }
-}
-
-const MintButton = ({tokenId}) => {
+const MintButton = ({tokenId, fee}) => {
   const options = {
     contractAddress: contractAddress,
     functionName:"omniMint",
-    abi:[{"inputs":[{"internalType":"uint256","name":"_tokenId","type":"uint256"},{"internalType":"uint32","name":"_amount","type":"uint32"}],"name":"omniMint","outputs":[],"stateMutability":"payable","type":"function"}],
+    abi:[{"inputs":[{"internalType":"uint256","name":"_tokenId","type":"uint256"},{"internalType":"uint32","name":"_amount","type":"uint32"},{"internalType":"bytes","name":"_data","type":"bytes"},{"internalType":"bytes32[]","name":"_merkleProof","type":"bytes32[]"}],"name":"omniMint","outputs":[],"stateMutability":"payable","type":"function"}],
     params:{
       _tokenId: tokenId,
-      _amount:1
+      _amount:1,
+      _data:"0x00",
+      _merkleProof:[]
     },
-    msgValue: handleFee("public sale",tokenId)
+    msgValue: fee
   };
 
   const classes = useStyles();
@@ -120,7 +91,7 @@ const MintButton = ({tokenId}) => {
     </div>)
 }
 
-const WLMintButton = ({data, tokenId}) => {
+const WLMintButton = ({data, tokenId, fee}) => {
 
   const classes = useStyles();
   const { account } = useMoralis();
@@ -130,13 +101,14 @@ const WLMintButton = ({data, tokenId}) => {
 
     leafNodes = data.map(addr => keccak256(addr));
     merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true});
-    // console.log(merkleTree.toString());
-    // console.log(keccak256(account));
+    console.log(merkleTree.toString());
+    console.log(keccak256(account));
     clamingHashedAddress = keccak256(account);
     return merkleTree.getHexProof(clamingHashedAddress);
   }
 
-  const hexPloof = getHexPloof(data.data[data.data.length-1].attributes.allowlist);
+  console.log("kore",data);
+  const hexPloof = getHexPloof(data[data.length-1].attributes.allowlist);
   // console.log('merklePloof\n',hexPloof);
 
   const options = {
@@ -146,10 +118,10 @@ const WLMintButton = ({data, tokenId}) => {
     params:{
       _tokenId: tokenId,
       _amount:1,
-      _data:"0x0",
-      _merkleProof:hexPloof
+      _data:"0x00",
+      _merkleProof:hexPloof?hexPloof:[]
     },
-    msgValue: handleFee("presale",tokenId)
+    msgValue: fee
   };
 
   const { fetch, error } = useWeb3ExecuteFunction(options);

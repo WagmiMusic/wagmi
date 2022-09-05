@@ -18,11 +18,13 @@ const useStyles = makeStyles({
         fontSize: 20,
     },
     logo: {
-        fontSize: 20,
+        width:"50%",
+        height:"4vw",
+        margin:"1vw",
     },
     customButton: {
         height: 40,
-        width: 80,
+        width: "7vw",
         fontSize: 16,
         fontFamily: 'Lato',
         fontWeight: 'bold',
@@ -34,13 +36,14 @@ const useStyles = makeStyles({
         backgroundColor: 'rgba(255,255,255,0.5)',
         fontSize: 16,
         fontFamily: 'Lato',
-        fontWeight: 'bold'
-    },
-    wallet: {
-        margin: 100,
+        fontWeight: 'bold',
+        maxWidth: 'auto',
+        maxHeight: 'auto',
+        minWidth: 'auto',
+        minHeight: 'auto',
     },
     buttonMargin: {
-        marginRight: 30,
+        marginRight: "2%",
         "box-sizing": "border-box"
     },
     iconMargin: {
@@ -62,20 +65,19 @@ const Header = ({color, subColor, sales}) => {
       <AppBar position="static" className={classes.headerBar}>
         <Toolbar>
             <Grid container className={classes.hederItem}>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                 <Button
                     href={Path.home}
                     className={classes.logo}
                     >
                     <img
-                        height={60}
-                        width={200}
+                        width={"150%"}
                         src="/image/wagmi_logo_noshadow_350_350.png" alt="wagmi"
                         style={{objectFit: 'cover'}}
                         />
                 </Button>
                 </Grid>
-                <Grid item xs={10} container spacing={1} justifyContent="flex-end" className={classes.bottons}>
+                <Grid item xs={9} container spacing={1} justifyContent="flex-end" className={classes.bottons}>
                     <Grid item className={classes.buttonMargin}>
                         <Button 
                             href={Path.home}
@@ -85,7 +87,7 @@ const Header = ({color, subColor, sales}) => {
                           Home
                         </Button>
                     </Grid>
-                    {sales===1||sales===0
+                    {sales==="1"||sales==="2"
                         ?<Grid item className={classes.buttonMargin}>
                         <Button 
                             href={Path.mint}
@@ -137,7 +139,7 @@ const Header = ({color, subColor, sales}) => {
                         </Button>
                     </Grid>
                     <Grid item>
-                        <ConnectWalletButton color={subColor} className={classes.wallet}/>
+                        <ConnectWalletButton color={subColor}/>
                     </Grid>
                 </Grid>
             </Grid>

@@ -7,13 +7,14 @@ import { WLMintButton, MintButton } from "../moralis/MintButton";
 import Spacer from "./Spacer";
 import { useMoralis, useMoralisQuery, useChain, useMoralisWeb3Api, useMoralisWeb3ApiCall } from "react-moralis";
 import { MusicContext } from "../provider/MusicProvider";
-import keccak256 from "keccak256";
-import { Buffer } from 'buffer';
-import { MerkleTree } from 'merkletreejs'
+import { MoralisProvider } from 'react-moralis';
+
+const APP_ID = process.env.REACT_APP_MORALIS_APPLICATION_ID;
+const SERVER_URL = process.env.REACT_APP_MORALIS_SERVER_URL;
 
 const useStyles = makeStyles({
     card: {
-        width: "auto",
+        width: "60vw",
         height: "auto",
         padding: 60,
         borderRadius: 20,
@@ -25,6 +26,7 @@ const useStyles = makeStyles({
         alignItems: 'center',
         fontFamily:'Lato',
         position:'relative',
+        flexWrap:'wrap'
     },
     image: {
         margin: 10,
@@ -102,10 +104,57 @@ const useStyles = makeStyles({
         top: '8%',
         left: '3%',
         transform: 'rotate(-20deg)'
-    }
+    },
+    price: {
+        fontWeight: 'bold',
+    },
+    customButton: {
+        height: "50%",
+        width: "50%",
+        fontSize: 20,
+        fontFamily: 'Lato',
+        fontWeight: 'bold',
+        backgroundColor: '#7547D7',
+        color: 'white',
+        "box-sizing": "border-box",
+        "&:hover": {
+            background: "#4911BF"
+          },
+    },
 });
 
-const MintButtons = ({tokenId, sales=1, checked, inStock}) => {
+const handleFee = (sale, id)=>{
+    const toWei = 1000000000000000000;
+    if(sale === "presale" || sale === 1){
+      switch(id){
+        case 1:
+          return(0.005 * toWei)
+        case 2:
+          return(0.2 * toWei)
+        case 3:
+          return(0.01 * toWei)
+        case 4:
+          return(0.01 * toWei)
+        default:
+          return(0)
+      }
+    }else if(sale === "public sale" || sale === 2){
+      switch(id){
+        case 1:
+          return(0.01 * toWei)
+        case 2:
+          return(0.4 * toWei)
+        case 3:
+          return(0.02 * toWei)
+        case 4:
+          return(0.02 * toWei)
+        default:
+          return(0)
+      }
+    }
+  }
+
+const MintButtons = ({tokenId, sales, checked, inStock}) => {
     const classes = useStyles();
 
     const [valid, setValid] = useState(false);
@@ -120,15 +169,17 @@ const MintButtons = ({tokenId, sales=1, checked, inStock}) => {
     )
 
     useEffect(() => {
-        if(data.length >= 1){
+        if(data.length >= 1 && account && sales==="1"){
             let wlarray = data[data.length-1].attributes.allowlist;
             let wlarray_lc = wlarray.map(addr => addr.toLowerCase());
             if(wlarray_lc.includes(`${account.toLowerCase()}`)){
                 console.log("You are whitelisted account");
+                // console.log(wlarray_lc);
+                // console.log(account.toLowerCase());
                 setValid(true);
             }else{
                 // console.log(wlarray_lc);
-                // console.log(testaccount.toLowerCase());
+                // console.log(account.toLowerCase());
                 console.log("You aren't whitelisted account");
             }
         }
@@ -156,7 +207,7 @@ const MintButtons = ({tokenId, sales=1, checked, inStock}) => {
         }else{
             if(!checked){
                 alert("You cannot mint because checkBox is not checked!")
-            }else if(!valid && sales===0){
+            }else if(!valid && sales==="1"){
                 alert("You cannot mint because you are not whitelisted!")
             }else if(!inStock){
                 alert("NFTs are out of stock!")
@@ -167,24 +218,27 @@ const MintButtons = ({tokenId, sales=1, checked, inStock}) => {
     }
     if((chainId==="0x1" || chainId==="0x5") && checked && inStock){
         /*
-        *  sale == 0 => preSale
-        *  sale == 1 => publicSale
-        *  sale == 2 => Suspended
+        *  sales == 0 => prepared
+        *  sales == 1 => presale
+        *  sales == 2 => pulicsale
+        *  sales == 3 => suspended
         */
         switch(sales){
             case "0":
+                return <Button className={classes.button} style={{backgroundColor: "#716E63"}} onClick={()=>{alert("mint sale has yet to start!", sales)}} >Mint</Button>
+            case "1":
                 if(valid && data){
                     return <div>
-                    <WLMintButton data={data} tokenId={tokenId}/>
+                    <WLMintButton data={data} tokenId={tokenId} fee={handleFee("presale", tokenId)}/>
                     </div>
                 }else{
                     return <Button className={classes.button} style={{backgroundColor: "#716E63"}} onClick={handleError} >Mint</Button>
                 }
-            case "1":
-                return <div>
-                <MintButton tokenId={tokenId}/>
-                </div>
             case "2":
+                return <div>
+                <MintButton tokenId={tokenId} fee={handleFee("public sale", tokenId)}/>
+                </div>
+            case "3":
                 return <Button className={classes.button} style={{backgroundColor: "#716E63"}} onClick={()=>{alert("Mint sale is suspended!")}} >Mint</Button>
             default:
                 return <Button className={classes.button} style={{backgroundColor: "#716E63"}} onClick={()=>{alert("mint sale has yet to start!", sales)}} >Mint</Button>
@@ -194,27 +248,27 @@ const MintButtons = ({tokenId, sales=1, checked, inStock}) => {
     }
 }
 
-const MusicCard = ({artist = "hibikilla", title = "LUNA",id = 1,baseId=2, inStock}) => {
+const MusicCard = ({artist = "hibikilla", title = "LUNA",id, baseId=0, inStock, sales}) => {
     const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
     const tokenId = baseId+id;
     // console.log("tokenId",tokenId)
-    const options = {
-        chain: "0x5",
+    const option = {
+        chain: "0x1",
         address: contractAddress,
         function_name: "sales",
         abi: [{"inputs":[{"internalType":"uint256","name":"para","type":"uint256"}],"name":"sales","outputs":[{"internalType":"enum WAGMIMusicToken1155.saletate","name":"","type":"uint8"}],"stateMutability":"view","type":"function"}],
-        params: {para:tokenId}
-    };
+        params: {para:1}
+      };
 
     const classes = useStyles();
     const { musicPlaying, onPlay, onStop } = useContext(MusicContext);
 
     const [checked, setChecked] = useState();
-    const [sales, setSales] = useState(1);
+    // const [sales, setSales] = useState("2");
 
     const { account } = useMoralis();
     const { native } = useMoralisWeb3Api();
-    const { fetch, data, error, isLoading } = useMoralisWeb3ApiCall(native.runContractFunction,{...options});
+    // const { fetch, data, error, isLoading } = useMoralisWeb3ApiCall(native.runContractFunction,{...option});
 
     const handleChange = (e) => {
         setChecked(e.target.checked)
@@ -224,20 +278,65 @@ const MusicCard = ({artist = "hibikilla", title = "LUNA",id = 1,baseId=2, inStoc
         return(`/image/luna${_id}.png`);
     }
 
-    useEffect(()=>{
-        fetch();
-    }, [account,fetch])
+    const handleOpensea = (id) => {
+        return(`https://opensea.io/assets/ethereum/${contractAddress}/${id}`)
+    }
 
-    useEffect(() => {
-        if(data){
-            setSales(data)
-        }
-    }, [data])
+    // useEffect(()=>{
+    //     fetch();
+    // }, [])
 
-    if(sales === "2"){
-        return <div></div>
-    }else{
-        return <div>
+    // useEffect(() => {
+    //     setSales(data);
+    // }, [data])
+
+    if(!inStock){
+        return <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
+                <Card raised className={classes.card}>
+                <div className={classes.graffiti}>Sold Out!</div>
+                    <div className={classes.image}>
+                        <img className={classes.img}
+                        src={handleSrc(id)}/>
+                    </div>
+                    <div className={classes.info}>
+                        <div className={classes.base}>
+                            <Button onClick={() => {
+                                if (musicPlaying === id) {
+                                    onStop(id);
+                                } else {
+                                    onPlay(id);
+                                }
+                            }}>
+                                {musicPlaying === id ?
+                                    <FontAwesomeIcon className={classes.icon} icon={faCirclePause} /> : 
+                                    <FontAwesomeIcon className={classes.icon} icon={faCirclePlay} />
+                                }
+                            </Button>
+                            <div className={classes.transparentBlock}></div>
+                            <div>
+                                <div style={{fontSize:24}}>{artist}</div>
+                                <div style={{fontSize:28, fontWeight: 'bold'}}>{title}</div>
+                            </div>
+                        </div>
+                        <Spacer height={10}/>
+                        <div className={classes.price}>
+                            - {handleFee(Number(sales), tokenId)/1000000000000000000} eth
+                        </div>
+                        <Spacer height={30}/>
+                        <Button 
+                            href={handleOpensea(tokenId)}
+                            target="_blank"
+                            className={classes.customButton}
+                            >
+                            Go Opensea
+                        </Button>
+                    </div>
+                </Card>
+        </MoralisProvider>;
+    }
+
+    if(sales==="1" || sales==="2") {
+        return <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
                 <Card raised className={classes.card}>
                 {/* <div className={classes.graffiti}>FreeMint !!</div> */}
                     <div className={classes.image}>
@@ -265,6 +364,10 @@ const MusicCard = ({artist = "hibikilla", title = "LUNA",id = 1,baseId=2, inStoc
                             </div>
                         </div>
                         <Spacer height={10}/>
+                        <div className={classes.price}>
+                            - {handleFee(Number(sales), tokenId)/1000000000000000000} eth
+                        </div>
+                        <Spacer height={10}/>
                         <div className={classes.form}>
                             <Checkbox 
                                 defaultChecked={false}
@@ -277,11 +380,53 @@ const MusicCard = ({artist = "hibikilla", title = "LUNA",id = 1,baseId=2, inStoc
                         <MintButtons tokenId={tokenId} checked={checked} sales={sales} inStock={inStock}/>
                     </div>
                 </Card>
-
-        </div>;
+        </MoralisProvider>;
+    } else if (sales==="3") {
+        return <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
+        <Card raised className={classes.card}>
+                <div className={classes.graffiti}>Completed!</div>
+                    <div className={classes.image}>
+                        <img className={classes.img}
+                        src={handleSrc(id)}/>
+                    </div>
+                    <div className={classes.info}>
+                        <div className={classes.base}>
+                            <Button onClick={() => {
+                                if (musicPlaying === id) {
+                                    onStop(id);
+                                } else {
+                                    onPlay(id);
+                                }
+                            }}>
+                                {musicPlaying === id ?
+                                    <FontAwesomeIcon className={classes.icon} icon={faCirclePause} /> : 
+                                    <FontAwesomeIcon className={classes.icon} icon={faCirclePlay} />
+                                }
+                            </Button>
+                            <div className={classes.transparentBlock}></div>
+                            <div>
+                                <div style={{fontSize:24}}>{artist}</div>
+                                <div style={{fontSize:28, fontWeight: 'bold'}}>{title}</div>
+                            </div>
+                        </div>
+                        <Spacer height={10}/>
+                        <div className={classes.price}>
+                            - {handleFee(Number(sales), tokenId)/1000000000000000000} eth
+                        </div>
+                        <Spacer height={30}/>
+                        <Button 
+                            href={handleOpensea(tokenId)}
+                            target="_blank"
+                            className={classes.customButton}
+                            >
+                            Go Opensea
+                        </Button>
+                    </div>
+                </Card>
+        </MoralisProvider>;
+    }else{
+        return <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}></MoralisProvider>
     }
-
-    
 };
 
 export default MusicCard;

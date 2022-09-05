@@ -4,21 +4,20 @@ import SalesInfo from "../components/SalesInfo";
 import Header from "../components/Header";
 import Spacer from "../components/Spacer";
 import React from "react";
-import TokenDoughnuts from "../components/TokenDoughnuts";
 import Footer from "../components/Footer";
+import SalesTracker from "../components/SalesTracker";
+import { useEffect } from "react";
+import { useMoralisWeb3Api, useMoralisWeb3ApiCall } from "react-moralis";
+
+const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 
 const useStyles = makeStyles({
     back: {
         backgroundColor: '#FFFAF3',
         minHeight: '100vh',
         minWidth: '100vw',
-        zIndex: -3
-    },
-    back2: {
-        backgroundColor: '#FFFAF3',
-        minHeight: '290vh',
-        minWidth: '100vw',
-        zIndex: -3
+        zIndex: -3,
+        overflow: "hidden"
     },
     back3: {
         backgroundColor: '#F4E8D6',
@@ -32,6 +31,8 @@ const useStyles = makeStyles({
     img: {
         width: 600,
         height: 600,
+        // width: "50vw",
+        // height: "50vw",
         borderRadius: "8%",
         position:'absolute',
         top: "50%",
@@ -42,6 +43,8 @@ const useStyles = makeStyles({
     iconimg: {
         width: 220,
         height: 220,
+        // width: "18vw",
+        // height: "18vw",
         borderRadius: "50%",
         position:'absolute',
         top: "50%",
@@ -60,14 +63,13 @@ const useStyles = makeStyles({
         // color:"white",
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'start',
         flexDirection: 'row',
+        flexWrap:'wrap'
     },
     margin: {
-        margin: 50,
-        width:200,
-        height:340,
-        marginLeft:200,
+        marginTop:"15vw",
+        marginBottom:"10vw",
         position:'relative',
     },
     icon: {
@@ -78,7 +80,7 @@ const useStyles = makeStyles({
         marginRight:20
     },
     artist: {
-        fontSize: 22,
+        fontSize: "100%",
         fontFamily:'Lato',
         fontWeight:'bold',
     },
@@ -100,9 +102,10 @@ const useStyles = makeStyles({
         flexDirection: 'row',
     },
     info: {
-        width:"80%",
-        padding:40,
-        zIndex: 3,
+        width:"90%",
+        paddingTop:'5vw',
+        padding:'3vw',
+        zIndex: 1,
         backgroundColor: 'rgba(255,255,255, 0.8)',
         borderRadius:40,
         // color:'white',
@@ -118,18 +121,24 @@ const useStyles = makeStyles({
         height: 25,
         borderRadius:'50%',
         boxShadow: 'inset 4px 4px 5px 1px rgba(0, 0, 0, 0.8)',
+    },
+    spacer: {
+        zIndex: 0,
+        marginLeft:"3vw",
+        width: "auto"
     }
 })
+
 const HomePage = ({sales, inStock, maxSupply, minted}) => {
     const classes = useStyles();
 
     return <>
         <div className={classes.back}>
         <Header color="#030303" subColor="white" sales={sales}/>
-        <Spacer height={75}/>
-        <div className={classes.columnCenter}>
+        <Spacer height={100}/>
             <Spacer height={100}/>
             <div className={classes.rowCenter}>
+            <Spacer width={"20vw"}/>
                 <div className={classes.margin}>
                     <img className={classes.img}
                     src="/image/record.png"/>
@@ -137,27 +146,27 @@ const HomePage = ({sales, inStock, maxSupply, minted}) => {
                     src="/image/luna1.png"/>
                     <div className={classes.circle}></div>
                 </div>
-                <div className={classes.info}>
-                    <div className={classes.row}>
-                        <img className={classes.icon}
-                        src="/image/hibikilla_icon.png"/>
-                        <div className={classes.artist}>
-                            hibikilla
+                <Spacer width={"10vw"}/>
+                <div className={classes.spacer}>
+                    <div className={classes.info}>
+                        <div className={classes.row}>
+                            <img className={classes.icon}
+                            src="/image/hibikilla_icon.png"/>
+                            <div className={classes.artist}>
+                                hibikilla
+                            </div>
                         </div>
+                        <div className={classes.title}>
+                                luna
+                        </div>
+                        <Grid item xs={12}>
+                            <SalesInfo sales={sales} supply={inStock}></SalesInfo>
+                        </Grid>
                     </div>
-                    <div className={classes.title}>
-                            luna
-                    </div>
-                    <Grid item xs={12}>
-                        <SalesInfo sales={sales} supply={inStock}></SalesInfo>
-                    </Grid>
                 </div>
             </div>
-        </div>
-        </div>
-        <div className={classes.back2}>
-        <Spacer height={100}/>
-        <TokenDoughnuts sales = {sales} supply={maxSupply} minted={minted}></TokenDoughnuts>
+        <Spacer height={"20vw"}/>
+        <SalesTracker sales = {sales} supply={maxSupply} minted={minted}></SalesTracker>
         <Spacer height={20}/>
         <Grid container justifyContent="center">
             <AboutUs/>

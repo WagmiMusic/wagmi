@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePause, faCirclePlay } from "@fortawesome/free-solid-svg-icons";
 import { getEllipsisTxt } from "../helpers/formatters";
 import { MusicContext } from "../provider/MusicProvider";
+import zIndex from "@material-ui/core/styles/zIndex";
 
 const useStyles = makeStyles({
     card: {
@@ -18,7 +19,8 @@ const useStyles = makeStyles({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingLeft: 5,
-        paddingRight: 5
+        paddingRight: 5,
+        zIndex:100,
     },
     playRecord: {
         width: 120,
@@ -84,6 +86,9 @@ const MusicTitle = () => {
 const Player = ({sales}) => {
     const classes = useStyles();
     const { musicPlaying, onPlay, onStop } = useContext(MusicContext);
+    if(sales==="0"||!sales){
+        return<div></div>
+    }
     return <div>
     <Card raised className={classes.card}>
         <div className={musicPlaying ? classes.playRecord : classes.stopRecord} >
