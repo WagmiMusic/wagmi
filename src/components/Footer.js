@@ -5,10 +5,11 @@ import { faTwitter, faGithub, faInstagram, faDiscord } from '@fortawesome/free-b
 
 const useStyles = makeStyles({
   back: {
-    backgroundColor: '#faf2e6',
-    minHeight: '55vh',
+    overflow: "hidden",
+    backgroundColor: 'rgba(0, 0, 0 ,0.6)',
+    minHeight: '65vh',
     minWidth: '100vw',
-    zIndex: -3,
+    zIndex:0,
   },
   columnCenter: {
     display: 'flex',
@@ -45,20 +46,19 @@ const useStyles = makeStyles({
   },
   label: {
     fontSize:20,
-    fontFamily:'Lato',
     fontWeight:'bolder',
   },
   title: {
     marginLeft:'4%',
     fontSize:18,
-    fontFamily:'Lato',
     fontWeight:'bolder',
   },
   description: {
+    fontFamily: "Lato",
     fontSize:14,
-    fontFamily:'Lato',
   },
   icon: {
+    color: "white",
     height:30,
   },
   exicon: {
@@ -70,11 +70,11 @@ const useStyles = makeStyles({
   },
   iconmargin: {
     "box-sizing": "border-box",
-    background: '#FFFAF3',
   },
   resource: {
+    color: "white",
     fontSize:15,
-    fontFamily:'Lato',
+    fontFamily:"Regular",
     maxHeight: '20px',
     justifyContent:'start',
     marginTop:'5%',
@@ -82,16 +82,16 @@ const useStyles = makeStyles({
   }
 })
 
-const Footer = () => {
+const Footer = ({color}) => {
   const classes = useStyles();
-  return<div className={classes.back}>
+  return<div className={classes.back} style={{color:color}}>
     <Spacer height={80}/>
     <div className={classes.columnCenter}>
       <div className={classes.rowCenter}>
         <Spacer width={"1vw"}/>
         <div className={classes.labelbox}>
           <img className={classes.logo}
-          src="/image/logo.png"/>
+          src="/logo_white.png"/>
           <Spacer height={10}/>
           <div className={classes.label}>WAGMI Music</div>
           <Spacer height={10}/>
@@ -103,7 +103,7 @@ const Footer = () => {
               href="https://responsible-hip-ae9.notion.site/Hibikilla-LUNA-Music-NFT-Lightpaper-281932987f1142a99509f6334f8e7810"
               target="_blank"
               className={classes.resource}
-              style={{backgroundColor:'#faf2e6'}}
+              style={{background:'transparent'}}
               >
               Light Paper
           </Button>
@@ -111,7 +111,7 @@ const Footer = () => {
               href="https://responsible-hip-ae9.notion.site/Hibikilla-LUNA-Music-NFT-Lightpaper-281932987f1142a99509f6334f8e7810"
               target="_blank"
               className={classes.resource}
-              style={{backgroundColor:'#faf2e6'}}
+              style={{background:'transparent'}}
               >
               Privacy Policy
           </Button>
@@ -119,7 +119,7 @@ const Footer = () => {
               href="https://twitter.com/allegory_write"
               target="_blank"
               className={classes.resource}
-              style={{backgroundColor:'#faf2e6'}}
+              style={{background:'transparent'}}
               >
               Contact
           </Button>

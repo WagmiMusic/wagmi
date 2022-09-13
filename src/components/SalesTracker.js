@@ -5,7 +5,9 @@ import Spacer from "./Spacer";
 
 const useStyles = makeStyles({
   title: {
-    fontSize: 60
+    color: "white",
+    fontSize: 60,
+    zIndex: 0,
   },
   columnCenter: {
     display: 'flex',
@@ -21,7 +23,6 @@ const useStyles = makeStyles({
     flexWrap: 'wrap',
   },
   saleLabels: {
-    height:400,
     width:'auto',
     display: 'flex',
     alignItems: 'center',
@@ -30,12 +31,13 @@ const useStyles = makeStyles({
     position:'relative',
   },
   saleLabel: {
-    color:'black',
+    color:'white',
     fontFamily:'Lato',
     fontWeight:'bold',
-    width: 350,
-    height:15,
-    borderRadius:"0.5vw",
+    width: 300,
+    height:10,
+    marginTop:"2vw",
+    borderRadius:10,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'start',
@@ -44,22 +46,22 @@ const useStyles = makeStyles({
     padding:25
   },
   colorTag: {
-    height:65,
+    height:60,
     width:"2%",
     left:0,
-    borderTopLeftRadius:"0.5vw",
-    borderBottomLeftRadius:"0.5vw",
+    borderTopLeftRadius:10,
+    borderBottomLeftRadius:10,
     position:'absolute',
   }
 })
 
 const SaleLabel = ({title, id, minted, supply, color}) => {
   const classes = useStyles();
-  return<div className={classes.saleLabel} style={{backgroundColor:"#F4E8D6"}}>
+  return<div className={classes.saleLabel} style={{backgroundColor:"#282333"}}>
     <div className={classes.colorTag} style={{backgroundColor:color}}>
     </div>
     <Spacer width={10}></Spacer>
-    <div style={{color:color, fontSize:20}}>
+    <div style={{color:color, fontSize:16}}>
       {Math.floor(minted*100/supply)}% minted 
     </div>
     <Spacer width={10}></Spacer>
@@ -67,7 +69,7 @@ const SaleLabel = ({title, id, minted, supply, color}) => {
       {minted}/{supply}
     </div>
     <Spacer width={10}></Spacer>
-    <div style={{fontSize:20}}>
+    <div style={{fontSize:16}}>
       {title}
     </div>
     <Spacer width={10}></Spacer>
@@ -75,7 +77,7 @@ const SaleLabel = ({title, id, minted, supply, color}) => {
 }
 
 
-const SalesTracker = ({sales, supply, minted}) => {
+const SalesTracker = ({sales, supply, minted, isMobile}) => {
   const classes = useStyles();
 
   return<div>
@@ -84,16 +86,15 @@ const SalesTracker = ({sales, supply, minted}) => {
     </div>
     <Spacer height={50}></Spacer>
     <div className={classes.rowCenter}>
-    <TokenDoughnuts sales = {sales} supply={supply} minted={minted}></TokenDoughnuts>
+    <TokenDoughnuts isMobile={isMobile} sales = {sales} supply={supply} minted={minted}></TokenDoughnuts>
     <div className={classes.saleLabels}>
         {/* '#1a1c1c','#6dbfbe','#d9e86b','#3755ed', '#F4E8D6' */}
-        <SaleLabel title={"Luna - Normal"} id={1} minted={minted[0]} supply={45} color={"#1a1c1c"}/>
+        <SaleLabel title={"Luna - Normal"} id={1} minted={minted[0]} supply={45} color={"#4911BF"}/>
         <SaleLabel title={"Luna - Special"} id={2} minted={minted[1]}  supply={5} color={"#6dbfbe"}/>
         <SaleLabel title={"Luna - Instrumental"} id={3} minted={minted[2]}  supply={5} color={"#b8c934"}/>
         <SaleLabel title={"Luna - Acappella"} id={4} minted={minted[3]}  supply={5} color={"#3755ed"}/>
     </div>
     </div>
-    <Spacer height={50}></Spacer>
   </div>
 }
 

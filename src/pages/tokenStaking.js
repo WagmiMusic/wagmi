@@ -7,7 +7,7 @@ import { Button, Typography, Card, makeStyles, InputLabel, MenuItem, FormControl
 
 const useStyles = makeStyles((theme)=>({
   back: {
-    backgroundColor: '#FFFAF3',
+    backgroundColor: '#151515',
     minHeight: '200vh',
     minWidth: '100vw',
     zIndex: -1

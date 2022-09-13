@@ -5,6 +5,10 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import Spacer from "./Spacer";
 
 const useStyles = makeStyles({
+    back: {
+        width: "100vw",
+        backgroundColor: "#42133b",
+    },
     title: {
         fontSize: 60
     },
@@ -13,6 +17,7 @@ const useStyles = makeStyles({
         marginBottom: 60
     },
     icon: {
+        color: "white",
         fontSize: 30
     },
     columnCenter: {
@@ -30,7 +35,7 @@ const useStyles = makeStyles({
     },
     profileCard: {
         width:"70%",
-        fontFamily: 'Lato',
+        // fontFamily: 'Lato',
         marginLeft: "1vw",
         marginRight: "1vw",
         display: 'flex',
@@ -49,12 +54,22 @@ const useStyles = makeStyles({
     profileDescription: {
         fontSize: 15,
         margin: "5%"
+    },
+    grad: {
+        background: "linear-gradient(to top, transparent, #151515)",
+        width: "100vw",
+        height: 300,
+    },
+    img: {
+        // borderRadius:"50%",
+        width: 300,
+        height: 300,
     }
 })
 const Profile = ({name, imageURL, title, description, twitter, globe, github, instagram}) => {
     const classes = useStyles();
     return <div className={classes.profileCard}>
-        <img width={250} height={250} src={imageURL} />
+        <img className={classes.img} src={imageURL} />
         <div className={classes.profileName}>{name}</div>
         <div className={classes.profileTitle}>{title}</div>
         <div className={classes.profileDescription}>{description}</div>
@@ -150,6 +165,7 @@ const AboutUs = () => {
                 github="https://github.com/hal-bo"
                 /> */}
         </div>
+        <Spacer height={100}/>
     </div>;
 
 };

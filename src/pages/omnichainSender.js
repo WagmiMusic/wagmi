@@ -11,7 +11,8 @@ import AllowListButton from "../moralis/AllowlistButton";
 
 const useStyles = makeStyles({
   back: {
-    backgroundColor: '#FFFAF3',
+    backgroundColor: '#151515',
+    color: "white",
     minHeight: '155vh',
     minWidth: '100vw',
     zIndex: -1
@@ -36,6 +37,7 @@ const useStyles = makeStyles({
     height: 50,
   },
   columnCenter: {
+    fontFamily: "Rock Salt",
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

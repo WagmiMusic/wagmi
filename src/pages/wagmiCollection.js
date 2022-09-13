@@ -11,7 +11,7 @@ const SERVER_URL = process.env.REACT_APP_MORALIS_SERVER_URL;
 
 const useStyles = makeStyles({
   back: {
-    backgroundColor: '#FFFAF3',
+    backgroundColor: '#151515',
     minHeight: '100vh',
     minWidth: '100vw',
     zIndex: -1

@@ -6,6 +6,7 @@ import OmnichainSender from '../pages/omnichainSender';
 import WagmiCollection from '../pages/wagmiCollection';
 import TokenExchanger from '../pages/tokenExchanger';
 import TokenStaking from '../pages/tokenStaking';
+import MusicData from '../pages/MusicData';
 
 export const Path = {
     home: "/",
@@ -14,7 +15,8 @@ export const Path = {
     omni: "/app/omni",
     album: "/app/album",
     exchange: "/app/exchange",
-    staking: "/app/staking"
+    staking: "/app/staking",
+    luna: "/hibikilla/luna",
 };
 
 const MyRoutes = ({sales, inStock, maxSupply, minted}) => {
@@ -27,7 +29,8 @@ const MyRoutes = ({sales, inStock, maxSupply, minted}) => {
                 <Route path={Path.omni} element={<OmnichainSender sales={sales}/>} />
                 <Route path={Path.album} element={<WagmiCollection sales={sales}/>} />
                 <Route path={Path.exchange} element={<TokenExchanger sales={sales}/>} />
-                <Route path={Path.staking} element={<TokenStaking sales={sales}/>}/>`
+                <Route path={Path.staking} element={<TokenStaking sales={sales}/>}/>
+                <Route path={Path.luna} element={<MusicData sales={sales}/>}/>`
             </Routes>
         </BrowserRouter>
     </>

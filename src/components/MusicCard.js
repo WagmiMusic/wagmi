@@ -63,6 +63,7 @@ const useStyles = makeStyles({
     },
     info: {
         marginLeft: 40,
+        marginRight: 40,
         width: 350,
         height: "auto",
         display: 'flex',

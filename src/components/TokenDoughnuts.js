@@ -3,6 +3,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Box, CircularProgress, Grid, Typography } from '@material-ui/core'
 import React from 'react'
+import Spacer from "../components/Spacer";
 import styled from 'styled-components'
 import { useEffect, useRef, useState } from "react";
 
@@ -19,9 +20,6 @@ const StyledDoughnuts = styled(Doughnut)`
 `
 
 const useStyles = makeStyles({
-  title: {
-    fontSize: 60
-  },
   columnCenter: {
     display: 'flex',
     alignItems: 'center',
@@ -29,7 +27,7 @@ const useStyles = makeStyles({
     flexDirection: 'column'
   },
   exGraph: {
-    marginRight:200
+    marginRight:180
   },
   graph: {
     width: "50vw",
@@ -37,6 +35,7 @@ const useStyles = makeStyles({
     position: "relative",
   },
   circle: {
+    display: 'flex',
     width: "20vw",
     height: "20vw",
     position: "absolute",
@@ -44,30 +43,33 @@ const useStyles = makeStyles({
     top: "51%",
     left: "50%",
     transform: "translate(-50%,-50%)",
-    background: "#030303",
+    background: '#9144fc',
+    justifyContent: 'center',
+    alignItems: 'center',
     "text-align": "center",
-    "line-height": "150px"
+    "line-height": "150px",
+    boxShadow: "0px 0px 30px 0px rgba(128, 44, 245, 0.8)"
   },
   dayLabel: {
+    fontFamily: "Lato",
     width: "auto",
     height: "50px",
     fontSize: 16,
     // fontWeight: 'bold',
     position: "relative",
     'margin-left': '10%',
-    fontFamily: 'Lato',
     display: 'flex',
     "align-items": "center",
     justifyContent: 'flex-start'
   },
   salesLabel: {
+    fontFamily: "Lato",
     width: "auto",
     height: "50px",
     fontSize: 16,
     // fontWeight: 'bold',
     position: "relative",
     'margin-left': '6%',
-    fontFamily: 'Rock Salt',
     display: 'flex',
     "align-items": "center",
     justifyContent: 'flex-start'
@@ -84,44 +86,40 @@ const useStyles = makeStyles({
     justifyContent: 'flex-start'
   },
   salesPoint: {
-    width:"1vw",
-    height:"1vw",
+    width:"0.6vw",
+    height: "0.6vw",
     "border-radius": "50%",
-    position: "relative"
+    position: "relative",
   },
   tokenSupply: {
     width: "auto",
     height: "auto",
     top: "50%",
     left: "50%",
-    transform: "translate(-50%,-50%)",
-    position: "absolute",
+    // transform: "translate(-50%,-50%)",
+    // position: "absolute",
     fontFamily: 'Lato',
-    "text-align": "center",
-    "line-height": "25px",
+    // "text-align": "center",
+    "line-height": "0px",
     color: "#FFFAF3"
   },
   tokenAmount: {
     width:"20vw",
     display: 'flex',
-    alignItems: 'center',
+    flexDirection: 'row',
+    alignItems: "end",
     justifyContent: 'center',
     flexWrap:'wrap'
   },
   sbold: {
-    fontSize: "20px",
-    fontWeight: 'bold',
-    "margin-left": "5px",
-    "margin-bottom": "20px"
+    fontFamily:"Medium",
+    "margin-bottom": "3vw"
   },
   bbold: {
-    fontSize: "30px",
-    fontWeight: 'bold',
-    "margin-left": "5px"
+    fontFamily:"Medium"
   },
   thin: {
-    fontSize: "24px",
-    "line-height": "20px"
+    fontFamily:"Lato"
   }
 });
 
@@ -130,11 +128,12 @@ const TokenDoughnut = ({supply, minted, total}) => {
     datasets: [
     {
       data: [minted[0], minted[1], minted[2], minted[3], supply - total],
-      backgroundColor: ['#1a1c1c','#6dbfbe','#d9e86b','#3755ed', '#F4E8D6'],
+      backgroundColor: ["#4911BF",'#6dbfbe','#d9e86b','#3755ed', '#151515'],
       borderWidth: 0,
-      borderRadius: 1,
+      borderRadius: 0,
+      borderColor: "#151515",
       radius:"80%",
-      cutout:"70%"
+      cutout:"95%"
     },
    ],
   };
@@ -170,11 +169,10 @@ const SalesLabels = ({sales}) => {
     datasets: [
      {
        data: [100],
-       backgroundColor: ['#F4E8D6'],
-       borderWidth: 1,
-       borderRadius: 1,
+       backgroundColor: ['#151515'],
+       borderWidth: 0,
        radius:"95%",
-       cutout:"98%"
+       cutout:"99%"
      },
     ],
   };
@@ -183,11 +181,10 @@ const SalesLabels = ({sales}) => {
     datasets: [
      {
        data: [12.5, 87.5],
-       backgroundColor: ['#030303', '#F4E8D6'],
-       borderWidth: 1,
-       borderRadius: 1,
+       backgroundColor: ["#d9c8f7", '#151515'],
+       borderWidth: 0,
        radius:"95%",
-       cutout:"98%"
+       cutout:"99.5%"
      },
     ],
   };
@@ -196,11 +193,10 @@ const SalesLabels = ({sales}) => {
     datasets: [
      {
        data: [25, 75],
-       backgroundColor: ['#030303', '#F4E8D6'],
-       borderWidth: 1,
-       borderRadius: 1,
+       backgroundColor: ["#d9c8f7", '#151515'],
+       borderWidth: 0,
        radius:"95%",
-       cutout:"98%"
+       cutout:"99.5%"
      },
     ],
   };
@@ -209,11 +205,10 @@ const SalesLabels = ({sales}) => {
     datasets: [
      {
        data: [37.5, 62.5],
-       backgroundColor: ['#030303', '#F4E8D6'],
-       borderWidth: 1,
-       borderRadius: 1,
+       backgroundColor: ["#d9c8f7", '#151515'],
+       borderWidth: 0,
        radius:"95%",
-       cutout:"98%"
+       cutout:"99.5%"
      },
     ],
   };
@@ -284,24 +279,24 @@ const SalesLabel = ({day, label, progress, degree1, degree2}) => {
   if(progress === "true"){
     return <div 
     className={classes.salesColumn} 
-    style={{transform: `translate(-155px,-20px) rotate(${degree1}deg) translate(23vw,0) rotate(${degree2}deg) translate(150px, 0px)`}}>
-    <div className={classes.salesPoint} style={{background: "#030303"}}></div>
-    <div className={classes.dayLabel} style={{color: "#030303"}}>{day}</div>
-    <div className={classes.salesLabel} style={{color: "#030303"}}>{label}</div>
+    style={{transform: `translate(-155px,-20px) rotate(${degree1}deg) translate(23.4vw,0) rotate(${degree2}deg) translate(150px, 0px)`}}>
+    <div className={classes.salesPoint} style={{background: "#d9c8f7"}}></div>
+    <div className={classes.dayLabel} style={{color: "#d9c8f7"}}>{day}</div>
+    <div className={classes.salesLabel} style={{color: "#d9c8f7"}}>{label}</div>
   </div>
   }else{
     return <div 
     className={classes.salesColumn} 
-    style={{transform: `translate(-155px,-20px) rotate(${degree1}deg) translate(23vw,0) rotate(${degree2}deg) translate(150px, 0px)`}}>
+    style={{transform: `translate(-155px,-20px) rotate(${degree1}deg) translate(23.4vw,0) rotate(${degree2}deg) translate(150px, 0px)`}}>
     {/* translate(-7px,-2px) rotate(${degree1}deg) translate(23.12vw,0) */}
-    <div className={classes.salesPoint} style={{background: "#F4E8D6"}}></div>
-    <div className={classes.dayLabel} style={{color: "#F4E8D6"}}>{day}</div>
-    <div className={classes.salesLabel} style={{color: "#F4E8D6"}}>{label}</div>
+    <div className={classes.salesPoint} style={{background: "#151515"}}></div>
+    <div className={classes.dayLabel} style={{color: "#151515"}}>{day}</div>
+    <div className={classes.salesLabel} style={{color: "#151515"}}>{label}</div>
     </div>
   }
 };
 
-const TokenDoughnuts = ({sales, supply, minted}) => {
+const TokenDoughnuts = ({sales, supply, minted, isMobile}) => {
 
  const classes = useStyles();
  const totalRef = useRef(0);
@@ -316,13 +311,17 @@ const TokenDoughnuts = ({sales, supply, minted}) => {
 
  return <div className={classes.exGraph}>
   <div className={classes.graph}>
-    <div className={classes.circle}></div>
-    <div className={classes.tokenSupply}>
-      <div className={classes.sbold}>total minted</div>
-      <div className={classes.tokenAmount}>
-        <div className={classes.bbold}>{total ?total :0}</div>
-        <div className={classes.thin}>/{supply}</div>
-        <div className={classes.bbold}>tokens</div>
+    <div className={classes.circle}>
+      <div className={classes.tokenSupply}>
+
+        <div className={classes.sbold} style={{fontSize:isMobile?"10px":"20px"}}>total minted</div>
+        <div className={classes.tokenAmount}>
+          <div className={classes.bbold} style={{fontSize:isMobile?"12px":"24px"}}>{total ?total :0}</div>
+          <div className={classes.thin} style={{fontSize:isMobile?"8px":"18px"}}>/{supply}</div>
+          <Spacer width={"0.5vw"}/>
+          <div className={classes.bbold} style={{fontSize:isMobile?"12px":"24px"}}>tokens</div>
+        </div>
+
       </div>
     </div>
     <TokenDoughnut supply={supply} minted={minted} total={total}></TokenDoughnut>

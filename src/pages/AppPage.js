@@ -8,8 +8,9 @@ import AllowListButton from "../moralis/AllowlistButton";
 
 const useStyles = makeStyles({
   back: {
-    backgroundColor: '#FFFAF3',
-    minHeight: '155vh',
+    color: "white",
+    backgroundColor: '#151515',
+    minHeight: '100vh',
     minWidth: '100vw',
     zIndex: -1
   },
@@ -104,7 +105,7 @@ const AppPage = ({sales}) => {
 
   return <>
   <div className={classes.back}>
-    <Header color="#030303" subColor="white" sales={sales}/>
+    <Header color="white" subColor="#030303" sales={sales}/>
     <Spacer height={150}></Spacer>
     <div className={classes.columnCenter}>
     <div className={classes.appField}>
@@ -194,8 +195,9 @@ const AppPage = ({sales}) => {
       </div>
     </div>
     </div>
+    <Spacer height={100}/>
+    <Footer/>
   </div>
-  <Footer/>
   </>
 }
 

@@ -6,7 +6,7 @@ import { ConfirmExchangeButton } from "../moralis/Confirm";
 
 const useStyles = makeStyles({
   back: {
-    backgroundColor: '#FFFAF3',
+    backgroundColor: '#151515',
     minHeight: '155vh',
     minWidth: '100vw',
     zIndex: -1

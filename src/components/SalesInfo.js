@@ -1,6 +1,7 @@
 import { div, makeStyles, Typography, Button, Grid } from "@material-ui/core";
 import Countdown from "react-countdown";
 import { Path } from './Routes';
+import Spacer from "../components/Spacer";
 
 const useStyles = makeStyles({
     rowCenter: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles({
         alignItems: 'center'
     },
     countCol: {
+        height: "auto",
         width: "20%",
         margin: 10,
         display: 'flex',
@@ -30,9 +32,10 @@ const useStyles = makeStyles({
         flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: '#030303',
-        boxShadow: '0px 2px 5px 0px rgba(0, 0, 0, 0.8)',
-        borderRadius: "15%",
+        // boxShadow: '0px 2px 5px 0px rgba(0, 0, 0, 0.8)',
+        borderRadius: "1vw",
         color: '#F2EBE4',
+        zIndex:2
     },
     colon: {
         display: 'flex',
@@ -44,14 +47,13 @@ const useStyles = makeStyles({
         fontFamily: 'Lato',
     },
     number: {
-        fontSize: "300%",
-        fontFamily: 'Lato',
+        fontSize: "200%",
+        fontFamily: 'Black',
         marginTop:"10%",
     },
     unit: {
-        fontSize: "100%",
-        fontFamily: 'Lato',
-        fontWeight: 'bold',
+        fontSize: "80%",
+        fontFamily: 'Light',
         marginBottom:"15%",
         marginLeft:"4vw",
         marginRight:"4vw",
@@ -61,20 +63,20 @@ const useStyles = makeStyles({
         marginLeft:30,
     },
     buttonMargin: {
-        margin: 10,
+        margin: "20px 80px 20px 80px",
         "box-sizing": "border-box"
     },
     customButton: {
         height: 60,
         width: 200,
-        fontSize: 24,
-        fontFamily: 'Lato',
-        fontWeight: 'bold',
-        backgroundColor: '#4911BF',
+        fontFamily: "Black",
+        fontSize: 16,
+        borderRadius: 30,
+        backgroundColor: 'black',
         color: 'white',
         "box-sizing": "border-box",
         "&:hover": {
-            background: "#4911BF"
+            background: 'black'
           },
     },
     incite: {
@@ -87,7 +89,14 @@ const useStyles = makeStyles({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-      },
+    },
+    fix:{
+        position:"fixed",
+    },
+    div: {
+        textShadow: '0px 0px 2px  rgba(0, 0, 0, 1)',
+        color: "white",
+    },
 });
 const Time = ({days, hours, minutes, seconds}) => {
     const classes = useStyles();
@@ -126,8 +135,8 @@ const SalesInfo = ({sales="0", supply}) => {
     const classes = useStyles();
     if(sales === "3"){
         return <div className={classes.columnCenter}>
-        <div className={classes.incite}>
-        Mint sale is finished !!
+        <div className={classes.div}>
+        Mint sale is over !!
         </div>
         <Grid item className={classes.buttonMargin}>
             <Button 
@@ -141,7 +150,7 @@ const SalesInfo = ({sales="0", supply}) => {
         </div>;
     } else if(sales === "1" || sales === "2"){
         return <div className={classes.columnCenter}>
-        <div className={classes.incite}>
+        <div className={classes.div}>
         Mint is now available !!
         </div>
         <Grid item className={classes.buttonMargin}>
@@ -154,12 +163,13 @@ const SalesInfo = ({sales="0", supply}) => {
         </Grid>
         </div>;
     } else {
-        return <div>
-        <div className={classes.description}>
+        return <div className={classes.columnCenter}>
+        <div className={classes.div}>
             New Single will be released soon . . . !!
         </div>
+        <Spacer height={10}/>
         <Countdown
-            date={new Date('August 19, 2022 21:00:00')}
+            date={new Date('September 19, 2022 21:00:00')}
             renderer={renderer}
         >
         </Countdown>

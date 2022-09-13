@@ -102,7 +102,7 @@ const App = () => {
     if(getTotalSupplyA.data){
       minted[0] = getTotalSupplyA.data;
       supply[0] = (maxStock[0]!==minted[0]);
-      console.log("dataA filled", minted, getTotalSupplyA.error);
+      // console.log("dataA filled", minted, getTotalSupplyA.error);
     }
   }, [getTotalSupplyA.data, minted[0]])
 
@@ -110,7 +110,7 @@ const App = () => {
     if(getTotalSupplyB.data){
       minted[1] = getTotalSupplyB.data;
       supply[1] = (maxStock[1]!==minted[1]);
-      console.log("dataB filled", minted, getTotalSupplyB.error);
+      // console.log("dataB filled", minted, getTotalSupplyB.error);
     }
   },[getTotalSupplyB.data, minted[1]])
 
@@ -118,7 +118,7 @@ const App = () => {
     if(getTotalSupplyC.data){
       minted[2] = getTotalSupplyC.data;
       supply[2] = (maxStock[2]!==minted[2]);
-      console.log("dataC filled", minted, getTotalSupplyC.error);
+      // console.log("dataC filled", minted, getTotalSupplyC.error);
     }
   },[getTotalSupplyC.data, minted[2]])
 
@@ -126,13 +126,13 @@ const App = () => {
     if(getTotalSupplyD.data){
       minted[3] = getTotalSupplyD.data;
       supply[3] = (maxStock[3]!==minted[3]);
-      console.log("dataD filled", minted, getTotalSupplyD.error);
+      // console.log("dataD filled", minted, getTotalSupplyD.error);
     }
   },[getTotalSupplyD.data, minted[3]])
 
   useEffect(() => {
     setSales(getSalesState.data)
-    console.log("sales filled", getSalesState.data)
+    // console.log("sales filled", getSalesState.data)
   },[getSalesState.data])
 
     return (
@@ -140,8 +140,8 @@ const App = () => {
       <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
         <ThemeProvider theme={theme}>
           <MusicProvider>
-            <div style={{position:'fixed', left: 30, bottom: 25, zIndex: 1}}> 
-              <Player sales={sales}/>
+            <div style={{position:'fixed', left: 30, bottom: 25, zIndex: 2}}> 
+              <Player sales={"1"}/>
             </div>
             <MyRoutes sales={sales} inStock={supply} maxSupply={maxSupply} minted={minted}/>
           </MusicProvider>
