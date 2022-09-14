@@ -557,7 +557,7 @@ const MusicData = ({sales}) => {
         <Spacer height={30}/>
         {value?<Earning isMobile={isMobile} value={value}/>:<></>}
       </div>
-      {isMobile?<></>:<img className={classes.img} src='/image/luna1.png'/>}
+      {isMobile?<></>:<img className={classes.img} src='/image/luna1.webp'/>}
     </div>
   </div>
   <Spacer height={30}/>

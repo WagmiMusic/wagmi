@@ -11,82 +11,82 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDatabase, faArrowUpRightFromSquare, faEllipsisVertical, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 const nfts = [
-    {image:'/image/wagmi1.jpg',
+    {image:'/image/wagmi1-320px.jpg',
     title:'WAGMI - Normal',
     artist:'Hibikilla',
     etherscan: 'https://polygonscan.com/address/0x2953399124f0cbb46d2cbacd8a89cf0599974963',
     opensea: 'https://opensea.io/ja/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/78555306292208822264975053909961537674478548303611333324072215595578311049286'},
-    {image:'/image/wagmi2.jpg',
+    {image:'/image/wagmi2-320px.jpg',
     title:'WAGMI - MV Rare',
     artist:'Hibikilla',
     etherscan: 'https://polygonscan.com/address/0x2953399124f0cbb46d2cbacd8a89cf0599974963',
     opensea: 'https://opensea.io/ja/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/78555306292208822264975053909961537674478548303611333324072215596677822676997'},
-    {image:'/image/wagmi3.jpg',
+    {image:'/image/wagmi3-320px.jpg',
     title:'WAGMI - Record Rare',
     artist:'Hibikilla',
     etherscan: 'https://polygonscan.com/address/0x2953399124f0cbb46d2cbacd8a89cf0599974963',
     opensea: 'https://opensea.io/ja/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/78555306292208822264975053909961537674478548303611333324072215597777334304773'},
-    {image:'/image/wagmi4.jpg',
+    {image:'/image/wagmi4-320px.jpg',
     title:'WAGMI - acappella',
     artist:'Hibikilla',
     etherscan: 'https://polygonscan.com/address/0x2953399124f0cbb46d2cbacd8a89cf0599974963',
     opensea: 'https://opensea.io/ja/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/78555306292208822264975053909961537674478548303611333324072215601075869188106'},
-    {image:'/image/omni1.jpg',
+    {image:'/image/omni1-320px.jpg',
     title:"Risin To The Top feat. Laya",
     artist:'Hibikilla',
     etherscan: 'https://polygonscan.com/address/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb',
     opensea: 'https://opensea.io/ja/assets/matic/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb/1'},
-    {image:'/image/omni2.jpg',
+    {image:'/image/omni2-320px.jpg',
     title:'Risin To The Top feat. Laya',
     artist:'Hibikilla',
     etherscan: 'https://polygonscan.com/address/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb',
     opensea: 'https://opensea.io/ja/assets/matic/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb/2'},
-    {image:'/image/omni3.jpg',
+    {image:'/image/omni3-320px.jpg',
     title:'Risin To The Top feat. Laya',
     artist:'Hibikilla',
     etherscan: 'https://polygonscan.com/address/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb',
     opensea: 'https://opensea.io/ja/assets/matic/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb/3'},
-    {image:'/image/omni4.jpg',
+    {image:'/image/omni4-320px.jpg',
     title:'Risin To The Top feat. Laya',
     artist:'Hibikilla',
     etherscan: 'https://polygonscan.com/address/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb',
     opensea: 'https://opensea.io/ja/assets/matic/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb/4'},
-    {image:'/image/omni5.jpg',
+    {image:'/image/omni5-320px.jpg',
     title:'Risin To The Top feat. Laya',
     artist:'Hibikilla',
     etherscan: 'https://polygonscan.com/address/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb',
     opensea: 'https://opensea.io/ja/assets/matic/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb/5'},
-    {image:'/image/omni6.jpg',
+    {image:'/image/omni6-320px.jpg',
     title:'Risin To The Top feat. Laya',
     artist:'Hibikilla',
     etherscan: 'https://polygonscan.com/address/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb',
     opensea: 'https://opensea.io/ja/assets/matic/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb/6'},
-    {image:'/image/omni7.jpg',
+    {image:'/image/omni7-320px.jpg',
     title:'Risin To The Top feat. Laya',
     artist:'Hibikilla',
     etherscan: 'https://polygonscan.com/address/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb',
     opensea: 'https://opensea.io/ja/assets/matic/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb/7'},
-    {image:'/image/badmind1.png',
+    {image:'/image/badmind1-320px.jpg',
     title:'Bad Mind feat. Itaq',
     artist:'Hibikilla',
     etherscan: 'https://polygonscan.com/address/0xb4fa9fee7b4f359a4c805b27932bca017d78bfeb',
     opensea: 'https://opensea.io/ja/assets/ethereum/0xa86a7046800c57236b61d1587f4abe9b38ab6f5d/0'},
-    {image:'/image/luna1.png',
+    {image:'/image/luna1-320px.jpg',
     title:'LUNA - Original',
     artist:'Hibikilla',
     etherscan: 'https://etherscan.io/address/0xd91a3ad7c4e093e1a934481cdc6755221e0c6ac4',
     opensea: 'https://opensea.io/ja/assets/ethereum/0xd91a3ad7c4e093e1a934481cdc6755221e0c6ac4/1'},
-    {image:'/image/luna2.png',
+    {image:'/image/luna2-320px.jpg',
     title:'LUNA - Special',
     artist:'Hibikilla',
     etherscan: 'https://etherscan.io/address/0xd91a3ad7c4e093e1a934481cdc6755221e0c6ac4',
     opensea: 'https://opensea.io/ja/assets/ethereum/0xd91a3ad7c4e093e1a934481cdc6755221e0c6ac4/2'},
-    {image:'/image/luna3.png',
+    {image:'/image/luna3-320px.jpg',
     title:'LUNA - Instrumental',
     artist:'Hibikilla',
     etherscan: 'https://etherscan.io/address/0xd91a3ad7c4e093e1a934481cdc6755221e0c6ac4',
     opensea: 'https://opensea.io/ja/assets/ethereum/0xd91a3ad7c4e093e1a934481cdc6755221e0c6ac4/3'},
-    {image:'/image/luna4.png',
+    {image:'/image/luna4-320px.jpg',
     title:'LUNA - Acappella',
     artist:'Hibikilla',
     etherscan: 'https://etherscan.io/address/0xd91a3ad7c4e093e1a934481cdc6755221e0c6ac4',
@@ -515,8 +515,8 @@ const HomePage = ({sales, inStock, maxSupply, minted}) => {
     <div className={classes.back}>
         <Header color="white" subColor="#030303" sales={sales}/>
         <div className={classes.top} style={{top:-scroll/2}}>
-            <img className={classes.background} src="/image/top_background.png"></img>
-            <img className={classes.seat} style={{bottom: scroll/8}} src="/image/top_seat.png"></img>
+            <img className={classes.background} src="/image/top_background.webp"></img>
+            <img className={classes.seat} style={{bottom: scroll/8}} src="/image/top_seat.webp"></img>
             <div className={classes.topgrad} style={{bottom: scroll/8}}>
             <div className={classes.box}></div>
             </div>
@@ -530,12 +530,12 @@ const HomePage = ({sales, inStock, maxSupply, minted}) => {
                     WAGMI Music is web3 digital agent and protect the right of artist with the power of blockchain
                 </div>
                 <img className={classes.img} style={{opacity:opacity}}
-                src={'/image/luna1.png'}/>
+                src={'/image/luna1.webp'}/>
                 <div className={classes.columnCenter} style={{opacity:opacity}}>
                     <div className={classes.margin}>
                     <div className={classes.rowCenter}>
                         <img className={classes.icon}
-                        src="/image/hibikilla_icon.png"/>
+                        src="/image/hibikilla_icon.webp"/>
                         <div className={classes.artist}>
                             hibikilla
                         </div>

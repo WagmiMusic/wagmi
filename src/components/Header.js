@@ -297,7 +297,7 @@ const Header = ({color, subColor, sales}) => {
                     >
                     <img
                         width={"100px"}
-                        src="/image/wagmi_logo_noshadow_350_350.png"
+                        src="/image/wagmi_logo_noshadow_350_350-320px.png"
                         alt="wagmi"
                         style={{objectFit: 'cover'}}
                         />

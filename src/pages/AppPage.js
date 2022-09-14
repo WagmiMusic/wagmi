@@ -114,7 +114,7 @@ const AppPage = ({sales}) => {
         <Card raised className={classes.appBox}>
           <div className={classes.frame}>
             <img className={classes.img}
-            src={`/image/omni2.jpg`}/>
+            src={`/image/omni2.webp`}/>
             <div className={classes.fade}></div>
           </div>
           <div className={classes.columnCenter}>
@@ -138,7 +138,7 @@ const AppPage = ({sales}) => {
         <Card raised className={classes.appBox}>
           <div className={classes.frame}>
             <img className={classes.img}
-            src={`/image/wagmi1.png`}/>
+            src={`/image/wagmi1.webp`}/>
             <div className={classes.fade}></div>
           </div>
           <div className={classes.columnCenter}>
@@ -163,7 +163,7 @@ const AppPage = ({sales}) => {
         <Card raised className={classes.appBox}>
           <div className={classes.frame}>
             <img className={classes.img}
-            src={`/image/wagmi2.png`}/>
+            src={`/image/wagmi2.webp`}/>
             <div className={classes.fade}></div>
           </div>
           <div className={classes.columnCenter}>
@@ -179,7 +179,7 @@ const AppPage = ({sales}) => {
         <Card raised className={classes.appBox}>
           <div className={classes.frame}>
             <img className={classes.img}
-            src={`/image/wagmi2.png`}/>
+            src={`/image/wagmi2.webp`}/>
             <div className={classes.fade}></div>
           </div>
           <div className={classes.columnCenter}>

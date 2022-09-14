@@ -116,7 +116,7 @@ const AboutUs = () => {
         <div className={classes.sub}>We are WAGMI music</div>
         <Profile
             name="Hibikilla"
-            imageURL="/image/hibikilla.png"
+            imageURL="/image/hibikilla.webp"
             title="artist"
             description='Hibikillaは北海道出身で現在は埼玉県在住のレゲエミュージシャンです。
             日本語DJ（レゲエ界では「DJ」は歌う人）スタイルで1998年から音楽活動をしています。

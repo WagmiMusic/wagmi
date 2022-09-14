@@ -163,42 +163,42 @@ const Jacket = ({tokenId}) => {
     case 1:
         return <div className={classes.image}>
         <img className={classes.img}
-        src='/image/omni1.jpg'/>
+        src='/image/omni1.webp'/>
         </div>
     case 2:
         return <div className={classes.image}>
         <img className={classes.img}
-        src='/image/omni2.jpg'/>
+        src='/image/omni2.webp'/>
         </div>
     case 3:
         return <div className={classes.image}>
         <img className={classes.img}
-        src='/image/omni3.jpg'/>
+        src='/image/omni3.webp'/>
         </div>
     case 4:
       return <div className={classes.image}>
       <img className={classes.img}
-      src='/image/omni4.jpg'/>
+      src='/image/omni4.webp'/>
       </div>
     case 5:
       return <div className={classes.image}>
       <img className={classes.img}
-      src='/image/omni5.jpg'/>
+      src='/image/omni5.webp'/>
       </div>
     case 6:
       return <div className={classes.image}>
       <img className={classes.img}
-      src='/image/omni6.jpg'/>
+      src='/image/omni6.webp'/>
       </div>
     case 7:
       return <div className={classes.image}>
       <img className={classes.img}
-      src='/image/omni7.jpg'/>
+      src='/image/omni7.webp'/>
       </div>
     default:
       return <div className={classes.image}>
       <img className={classes.img}
-      src='/image/omni1.jpg'/>
+      src='/image/omni1.webp'/>
       </div>
 }
 }
@@ -262,7 +262,7 @@ const OmnichainSender = ({sales}) => {
                             Polygon
                           </Card>:
                           <Card raised className={classes.chainCard}>
-                            <img className={classes.ethereum} src="/image/ethereum.png"/>
+                            <img className={classes.ethereum} src="/image/ethereum.webp"/>
                             Ethereum
                           </Card>
                           }
@@ -278,7 +278,7 @@ const OmnichainSender = ({sales}) => {
                         <div className={classes.from}>
                           <div style={{fontSize:22, marginBottom: '4%'}}>to</div>
                           {ToETH ?<Card raised className={classes.chainCard}>
-                            <img className={classes.ethereum} src="/image/ethereum.png"/>
+                            <img className={classes.ethereum} src="/image/ethereum.webp"/>
                             Ethereum
                           </Card>
                           :

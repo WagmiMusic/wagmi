@@ -276,7 +276,7 @@ const MusicCard = ({artist = "Hibikilla", title = "LUNA",id, baseId=0, inStock, 
     }
 
     const handleSrc = (_id) => {
-        return(`/image/luna${_id}.png`);
+        return(`/image/luna${_id}.webp`);
     }
 
     const handleOpensea = (id) => {
