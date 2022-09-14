@@ -107,9 +107,6 @@ const Player = ({sales}) => {
     if(musicPlaying){
         return <div>
         <Card raised className={classes.circle}>
-            {/* <div className={classes.animationText}>
-                <MusicTitle musicPlaying={musicPlaying}></MusicTitle>
-            </div> */}
             <Button className={classes.circle} onClick={() => {
                 if (musicPlaying) {
                     onStop();
@@ -124,15 +121,6 @@ const Player = ({sales}) => {
     }else{
         return <div>
         <Card raised className={classes.card}>
-            {/* <div className={musicPlaying ? classes.playRecord : classes.stopRecord} >
-            {musicPlaying ? 
-                <img width={60} height={60} src="/image/record_play.png" /> :
-                <img width={60} height={60} src="/image/record_stop.png" />
-            }
-            </div>
-            <div className={classes.transparentBlock}>
-    
-            </div> */}
             
             <Button className={classes.circle} onClick={() => {
                 if (musicPlaying) {

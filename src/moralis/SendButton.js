@@ -16,9 +16,6 @@ const useStyles = makeStyles({
     "&:hover": {
       background: "#B58B07"
     },
-    // "&:active": {
-    //   background: "aqua"
-    // }
   },
 });
 
@@ -42,7 +39,6 @@ const EstGasExtension = ({address, tokenId, toETH}) => {
     params: {
       _dstChainId:getChainId(toETH),
       _toAddress: account,
-      // _toAddress: "0xaDAcbA4Cae9471C26D613F7A94014549a647783C",
       _tokenId:tokenId,
       _amount:1,
       _useZro:"false",
@@ -55,9 +51,7 @@ const EstGasExtension = ({address, tokenId, toETH}) => {
   useEffect(() => {
     fetch();
   }, [toETH]);
-  useEffect(() => {
-    // console.log("estimateFee",data ?data[0] :null);
-  }, [data]);
+
   return<div>
     <SendButton address={address} tokenId={tokenId} toETH={toETH} fee={data ?data[0] :0}/>
   </div>

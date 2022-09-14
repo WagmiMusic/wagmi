@@ -13,47 +13,6 @@ import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-// const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
-//   color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#eaeaf0',
-//   display: 'flex',
-//   height: 15,
-//   alignItems: 'center',
-//   ...(ownerState.active && {
-//     color: '#784af4',
-//   }),
-//   '& .QontoStepIcon-completedIcon': {
-//     color: '#784af4',
-//     zIndex: 1,
-//     fontSize: 18,
-//   },
-//   '& .QontoStepIcon-circle': {
-//     width: 8,
-//     height: 8,
-//     borderRadius: '50%',
-//     backgroundColor: 'currentColor',
-//   },
-// }));
-
-// function QontoStepIcon(props) {
-//   const { active, completed, className } = props;
-
-//   return (
-//     <QontoStepIconRoot ownerState={{ active }} className={className}>
-//       {completed ? (
-//         <Check className="QontoStepIcon-completedIcon" />
-//       ) : (
-//         <div className="QontoStepIcon-circle" />
-//       )}
-//     </QontoStepIconRoot>
-//   );
-// }
-
-// QontoStepIcon.propTypes = {
-//   active: PropTypes.bool,
-//   className: PropTypes.string,
-//   completed: PropTypes.bool,
-// };
-
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 13,

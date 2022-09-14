@@ -152,18 +152,6 @@ const TokenDoughnut = ({supply, minted, total}) => {
 }
 
 const SalesLabels = ({sales}) => {
-  // const graphdata = {
-  //   datasets: [
-  //    {
-  //      data: [25, 75],
-  //      backgroundColor: ['#030303', '#F4E8D6'],
-  //      borderWidth: 1,
-  //      borderRadius: 1,
-  //      radius:200,
-  //      cutout:"98%"
-  //    },
-  //   ],
-  // };
 
   const graphdata_prepared = {
     datasets: [
@@ -288,7 +276,6 @@ const SalesLabel = ({day, label, progress, degree1, degree2}) => {
     return <div 
     className={classes.salesColumn} 
     style={{transform: `translate(-155px,-20px) rotate(${degree1}deg) translate(23.4vw,0) rotate(${degree2}deg) translate(150px, 0px)`}}>
-    {/* translate(-7px,-2px) rotate(${degree1}deg) translate(23.12vw,0) */}
     <div className={classes.salesPoint} style={{background: "#151515"}}></div>
     <div className={classes.dayLabel} style={{color: "#151515"}}>{day}</div>
     <div className={classes.salesLabel} style={{color: "#151515"}}>{label}</div>
@@ -329,55 +316,5 @@ const TokenDoughnuts = ({sales, supply, minted, isMobile}) => {
   </div>
 </div>;
 }
-
-// const CircularInternalContent = styled.div`
-//   // left: 0;
-//   // top: 16px;
-//   // bottom: 0;
-//   // right: 0;
-//   position: absolute;
-// `
-
-// const ProbabilitySuffix = styled(Typography)`
-//   margin-bottom: 4px;
-// `;
-
-// const StyledCircularBackground = styled(CircularProgress)`
-//   color: #4A434D;
-//   position: absolute;
-// `;
-
-// const StyledCircularBar = styled(CircularProgress)`
-//   position: absolute;
-// `;
-
-
-// const Tokenomics = () => {
-//   const classes = useStyles();
-//   const value = 80;
-//   return (
-//     <div className={classes.columnCenter}>
-//     <div className={classes.title}>Tokenomics</div>
-//     <Box position="relative" display="inline-flex">
-//       {/* 背景用のCircularProgress */}
-//       {/* <StyledCircularBackground variant="determinate" size={96} value={100} /> */}
-//       {/* バロメーター用のCircularProgress */}
-//       {/* <StyledCircularBar variant="determinate" size={96} value={value} /> */}
-//       <CircularInternalContent>
-//         <Grid container justify="center">
-//           <Grid
-//             container
-//             justify="center"
-//             alignItems="flex-end"
-//           >
-//             <Typography variant="h5">{value}</Typography>
-//             <ProbabilitySuffix variant="caption">%</ProbabilitySuffix>
-//           </Grid>
-//         </Grid>
-//       </CircularInternalContent>
-//     </Box>
-//     </div>
-//   )
-// }
 
 export default TokenDoughnuts;

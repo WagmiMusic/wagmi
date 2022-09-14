@@ -469,16 +469,11 @@ const Earning = ({isMobile, value}) => {
           JPY
         </div>
         <Spacer width={10}/>
-        {/* <FontAwesomeIcon className={classes.icon} icon={faShareNodes}/> */}
-        {/* <img className={classes.icon} src='/image/chainlink.svg'/> */}
       </div>
       <div className={classes.rowStart} style={{fontFamily:"Regular",fontSize:16}}>
         <div>Recoup line : {10000} JPY</div>
       </div>
       </EarningRoot>
-      {/* <div className={classes.rowStart} style={{fontFamily:"Regular",fontSize:16}}>
-        <div>Recoup line : {10000} JPY</div>
-      </div> */}
     </div>
   </EarningBoxRoot>
 }

@@ -175,12 +175,8 @@ const MintButtons = ({tokenId, sales, checked, inStock}) => {
             let wlarray_lc = wlarray.map(addr => addr.toLowerCase());
             if(wlarray_lc.includes(`${account.toLowerCase()}`)){
                 console.log("You are whitelisted account");
-                // console.log(wlarray_lc);
-                // console.log(account.toLowerCase());
                 setValid(true);
             }else{
-                // console.log(wlarray_lc);
-                // console.log(account.toLowerCase());
                 console.log("You aren't whitelisted account");
             }
         }
@@ -252,24 +248,11 @@ const MintButtons = ({tokenId, sales, checked, inStock}) => {
 const MusicCard = ({artist = "Hibikilla", title = "LUNA",id, baseId=0, inStock, sales}) => {
     const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
     const tokenId = baseId+id;
-    // console.log("tokenId",tokenId)
-    const option = {
-        chain: "0x1",
-        address: contractAddress,
-        function_name: "sales",
-        abi: [{"inputs":[{"internalType":"uint256","name":"para","type":"uint256"}],"name":"sales","outputs":[{"internalType":"enum WAGMIMusicToken1155.saletate","name":"","type":"uint8"}],"stateMutability":"view","type":"function"}],
-        params: {para:1}
-      };
 
     const classes = useStyles();
     const { musicPlaying, onPlay, onStop } = useContext(MusicContext);
 
     const [checked, setChecked] = useState();
-    // const [sales, setSales] = useState("2");
-
-    const { account } = useMoralis();
-    const { native } = useMoralisWeb3Api();
-    // const { fetch, data, error, isLoading } = useMoralisWeb3ApiCall(native.runContractFunction,{...option});
 
     const handleChange = (e) => {
         setChecked(e.target.checked)
@@ -282,14 +265,6 @@ const MusicCard = ({artist = "Hibikilla", title = "LUNA",id, baseId=0, inStock, 
     const handleOpensea = (id) => {
         return(`https://opensea.io/assets/ethereum/${contractAddress}/${id}`)
     }
-
-    // useEffect(()=>{
-    //     fetch();
-    // }, [])
-
-    // useEffect(() => {
-    //     setSales(data);
-    // }, [data])
 
     if(!inStock){
         return <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>

@@ -126,28 +126,7 @@ const AboutUs = () => {
             twitter="https://twitter.com/hibikilla30"
             globe="https://linktr.ee/hibikilla"
             />
-        <Spacer height={50}/>
-        {/*<div className={classes.rowCenter}>
-            <Profile
-                name="Hibikilla"
-                imageURL="/image/hibikilla.png"
-                title="artist"
-                description="北海道出身で現在は埼玉県在住のレゲエミュージシャン。日本語DJ（レゲエ界では「DJ」は歌う人）スタイルで1998年から音楽活動を続けている。「ミュージックマガジン」誌の年間ベスト・アルバム受賞経験や100万再生を超える数本のYoutube動画がある。5年ほどの活動休止期間を経て、2020年には「この世界 feat. Dabo」でiTunes Storeレゲエシングルチャート1位を、「Wha Gwaan Midnight feat. Tach-B and Zukie」でAudiusレゲエ部門年間1位を記録。2021年には「This World Riddim」でiTunes Storeレゲエアルバムチャート1位、2022年にも「No Limit feat. Gabby」でiTunes Storeレゲエシングルチャート1位を記録。"
-                twitter="https://twitter.com/hibikilla30"
-                globe="https://linkco.re/2nnn3Ysv"
-            />
-            <Profile
-                name="Itaq"
-                imageURL="/image/itaq.jpg"
-                title="artist"
-                description="1999年生。幸福の科学学園中学校・高等学校在学中にヒップホップと出会い、孤独の中で腕を磨く。上京後の2019年に粗悪ビーツが作曲を担当した1st Album『委託』をリリース。
-                2020年にはABEMA「ラップスタア誕生」にてファイナリストとなり、自身の信仰をレプリゼントした姿勢と濃密な歌詞、卓越したラップスキルを世間に知らしめた。
-                2021年5月に、2nd Album『Savior of Aquarius』をリリース。全体で一つの物語となる構成が話題を呼んだ。"
-                twitter="https://twitter.com/itaq_nasu"
-                instagram="https://www.instagram.com/itaq_nasu/"
-            />
-        </div>*/}
-        <Spacer height={100}/>
+        <Spacer height={150}/>
         <div className={classes.rowCenter}>
             <Profile
                 name="Allegorywrite"
@@ -156,14 +135,6 @@ const AboutUs = () => {
                 twitter="https://twitter.com/allegory_write"
                 github="https://github.com/allegorywrite"
             />
-            {/* <Spacer width={"20vw"}/>
-            <Profile
-                name="hal"
-                imageURL="/image/hal.PNG"
-                title="Frontend Engineer"
-                twitter="https://twitter.com/hal_bo_"
-                github="https://github.com/hal-bo"
-                /> */}
         </div>
         <Spacer height={100}/>
     </div>;

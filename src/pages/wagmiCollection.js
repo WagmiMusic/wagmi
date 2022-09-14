@@ -85,7 +85,6 @@ const useStyles = makeStyles({
     fontSize:20,
   },
   aDesc: {
-    // fontFamily:'Lato',
     fontSize:10,
   },
   rowLeft: {
@@ -120,23 +119,18 @@ const WagmiCollection = ({sales}) => {
   const connectorId = window.localStorage.getItem("connectorId");
   if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
     enableWeb3({ provider: connectorId });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isWeb3Enabled]);
 
   const fetchToken = async () => {
-    // Luna Token
     const options = {
       chain: "0x1",
       address: account,
       token_address: "0xa86a7046800c57236B61d1587f4aBE9B38Ab6F5d",
     };
     const token = await Web3Api.account.getNFTsForContract(options);
-    // console.log("token",token);
-    // console.log("tokenUri",token.result[0].token_uri);
     setUpdate(update?false:true)
     token.result.forEach((res, i) => {
       tokenArray.push([res.token_id, res.amount, res.token_uri]);
-      // console.log("umm",tokenArray);
       setUpdate(update?false:true)
     })
   }
@@ -149,12 +143,9 @@ const WagmiCollection = ({sales}) => {
       token_address: "0xd91A3ad7C4e093E1A934481cDC6755221E0c6ac4",
     };
     const token = await Web3Api.account.getNFTsForContract(options);
-    // console.log("lunatoken",token);
-    // console.log("lunatokenUri",token.result[0].token_uri);
     setUpdate(update?false:true)
     token.result.forEach((res, i) => {
       tokenArray.push([res.token_id, res.amount, res.token_uri]);
-      // console.log("umm",tokenArray);
       setUpdate(update?false:true)
     })
   }
@@ -167,13 +158,8 @@ const WagmiCollection = ({sales}) => {
       token_address: "0xb4fa9FEe7B4f359a4C805b27932bca017D78bfeb",
     };
     const token = await Web3Api.account.getNFTsForContract(options);
-    // console.log("legacy",token);
-    // console.log("legacyUri",token.result[0].token_uri);
-    // setUpdate(update?false:true)
     token.result.forEach((res, i) => {
       tokenArray.push([res.token_id, res.amount, res.token_uri]);
-      // console.log("umm",tokenArray);
-      // setUpdate(update+1)
     })
   }
 
@@ -192,33 +178,12 @@ const WagmiCollection = ({sales}) => {
     }
   },[])
 
-  // useEffect(()=>{
-  //   fetchLegacyToken();
-  // },[account])
-
-  // useEffect(()=>{
-  //   fetchLunaToken();
-  // },[account])
-
-  // useEffect(()=>{
-  //   fetchToken();
-  // },[account])
-
   useEffect(() => {
     const connectorId = window.localStorage.getItem("connectorId");
     if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
       enableWeb3({ provider: connectorId });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isWeb3Enabled]);
 
-  // useEffect(()=>{
-  //   console.log("detect array",tokenArray.length)
-  //   setUpdate(update+1)
-  // },[tokenArray.length])
-
-  // useEffect(()=>{
-  //   console.log("update")
-  // },[update])
   if(tokenArray.length){
     return <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
     <div className={classes.back}>

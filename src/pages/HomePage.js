@@ -271,7 +271,6 @@ const useStyles = makeStyles({
     },
     newsBox: {
         top: "50vw",
-        // left: "400vw",
         position: "fixed",
     },
     news: {
@@ -303,15 +302,12 @@ const useStyles = makeStyles({
         justifyContent: 'start',
         alignItems: 'start',
         flexDirection: 'row',
-        // flexWrap:'wrap'
-        // animation: `$text_scroll 20s linear infinite`,
     },
     '@keyframes text_scroll': {
         '0%': { transform: 'translateX(1px)'},
         '100%': { transform: 'translateX(-50%)'}
     },
     mtext: {
-        // marginLeft: 20,
         fontFamily: "Regualr",
         fontSize: 10,
     },
@@ -322,18 +318,13 @@ const useStyles = makeStyles({
     },
     textBox: {
         width: 160,
-        // backgroundColor: "red",
         overflow: "hidden",
         zIndex: 0,
     },
     text: {
-        // width: 120,
         display: 'inline-block',
-        // marginLeft: 20,
         fontFamily: "Black",
         fontSize: 20,
-        // flexWrap:'wrap',
-        // overflow: "auto",
         "&:hover": {
             animation: `$text_scroll 5s linear infinite`,
         },
@@ -343,7 +334,6 @@ const useStyles = makeStyles({
         position: "absolute",
         bottom: -300,
         width: "100vw",
-        // height: 100,
         backgroundColor: '#151515',
     },
     dataBox: {
@@ -352,7 +342,6 @@ const useStyles = makeStyles({
         borderRadius:10,
         bottom: -200,
         width: 200,
-        // height: 160,
         backgroundColor: "white",
     },
     dataTitle: {
@@ -371,20 +360,14 @@ const useStyles = makeStyles({
         fontSize:14,
     },
     iconButton: {
-        // maxWidth:20,
-        // minWidth:20,
         maxHeight:20,
         minHeight:20,
     },
     circle: {
         width: 12,
         height: 12,
-        // border: "solid",
         borderRadius: "50%",
-        // borderWidth: 1.3,
         color: "#7547D7",
-        // borderColor: "#7547D7",
-        // background: "#7547D7",
     },
     bottom: {
         position: "absolute",
@@ -545,39 +528,13 @@ const HomePage = ({sales, inStock, maxSupply, minted}) => {
                         </div>
                     </div>
                     </div>
-                    {/* <Spacer height={20}/> */}
                     <SalesInfo sales={sales} supply={inStock}></SalesInfo>
                 </div>   
                 </div>
             </div>
         </div>
-        {/* <Spacer height={600}/> */}
-        {/* <div className={classes.newsTitle} style={{left:1000 - scroll}}>
-            WAGMI Music
-        </div> */}
-        {/* <div className={classes.newsBox}>
-        <div className={classes.news} style={{top:trik, left: fix, opacity: opacity?0:1}}> */}
-        {/* left: -2*scroll */}
-        {/* <div className={classes.columnCenter} style={{width: "100vw"}}>
-            <div className={classes.newsText}>
-                {nfts.map((data, i) => 
-                <Music key={i} data={data}/>
-                )}
-            </div>
-        </div> */}
-            {/* <div className={classes.newsText}>
-                <div>
-                WAGMI Music is web3 digital agent and protect the right of artist with the power of blockchain 
-                </div>
-                <div style={{marginLeft: 60}}>
-                WAGMI Music is web3 digital agent and protect the right of artist with the power of blockchain 
-                </div>
-            </div> */}
-        {/* </div>
-        </div> */}
         <Spacer height={"50vw"}/>
         <Spacer height={450}/>
-        {/* <div className={classes.newsTitle}>WagmiMusic</div> */}
         <div className={classes.columnCenter} style={{width: "100vw", opacity:1-opacity}}>
         <div className={classes.title}>Discography</div>
         <Spacer height={20}/>
@@ -587,7 +544,6 @@ const HomePage = ({sales, inStock, maxSupply, minted}) => {
             )}
         </div>
         </div>
-        {/* <Spacer height={200}/> */}
         <SalesTracker isMobile={isMobile} sales = {sales} supply={maxSupply} minted={minted}></SalesTracker>
     </div>
     <div className={classes.back2}>
@@ -598,19 +554,6 @@ const HomePage = ({sales, inStock, maxSupply, minted}) => {
         <Footer/>
     </div>
     </>;
-
-    // return <>
-    //     <div className={classes.back}>
-    //     <Header color="#030303" subColor="white" sales={sales}/>
-    //     <SalesTracker sales = {sales} supply={maxSupply} minted={minted}></SalesTracker>
-    //     <Spacer height={20}/>
-    //     <Grid container justifyContent="center">
-    //         <AboutUs/>
-    //     </Grid>
-    //     <Spacer height={100}/>
-    //     </div>
-    //     <Footer/>
-    // </>;
 };
 
 export default HomePage;
