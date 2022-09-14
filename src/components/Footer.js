@@ -136,7 +136,7 @@ const Footer = ({color}) => {
                 <FontAwesomeIcon className={classes.icon} icon={faDiscord} />
             </Button>
             <Button
-                href="https://twitter.com/hibikilla30"
+                href="https://twitter.com/wagmi_music"
                 target="_blank"
                 className={classes.exicon}
                 >

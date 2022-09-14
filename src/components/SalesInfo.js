@@ -144,7 +144,7 @@ const SalesInfo = ({sales="0", supply}) => {
                 target="_blank"
                 className={classes.customButton}
                 >
-                Go Opensea
+                Go OpenSea
             </Button>
         </Grid>
         </div>;

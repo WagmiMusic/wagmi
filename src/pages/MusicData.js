@@ -552,7 +552,7 @@ const MusicData = ({sales}) => {
   <div className={classes.info}>
     <div className={classes.musicBox}>
       <div className={classes.columnStart}>
-        <div className={classes.artist} style={{fontSize:isMobile?20:30}}>hibikilla</div>
+        <div className={classes.artist} style={{fontSize:isMobile?20:30}}>Hibikilla</div>
         <div className={classes.musicTitle} style={{fontSize:isMobile?30:60}}>Luna - Normal</div>
         <Spacer height={30}/>
         {value?<Earning isMobile={isMobile} value={value}/>:<></>}

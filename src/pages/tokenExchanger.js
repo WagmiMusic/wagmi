@@ -249,7 +249,7 @@ const TokenExchanger = ({sales}) => {
                           <div style={{fontSize:22, marginBottom: '4%'}}>legacy</div>
                           <Card raised className={classes.chainCard}>
                             <img className={classes.polygon} src="/image/polygon.svg"/>
-                            Opensea contract
+                            OpenSea contract
                           </Card>
                           </div>
                         <Spacer height={30}/>
