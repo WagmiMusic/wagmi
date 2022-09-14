@@ -140,7 +140,7 @@ ColorlibStepIcon.propTypes = {
   icon: PropTypes.node,
 };
 
-const steps = ['Create Music', 'Sale', 'Recoup', 'Distribute'];
+const steps = ['Create Music', 'Sale', 'Recoup', 'WAGMI!'];
 
 export default function Sequence({step = 0}) {
   return (

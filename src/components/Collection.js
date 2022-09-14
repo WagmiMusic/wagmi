@@ -125,7 +125,7 @@ const Collection = ({data}) => {
         <Spacer height={10}/>
         <div className={classes.rowCenter}>
           <Button
-              href="https://twitter.com/hibikilla30"
+              href="https://opensea.io/collection/wagmimusic"
               target="_blank"
               className={classes.customIcon}
               >

@@ -178,14 +178,14 @@ const Menu = ({open}) => {
                 href={Path.app}
                 className={classes.menuItem}
                 >
-                Opensea
+                OpenSea
             </Button>
             <div className={classes.bar}/>
             <Button 
                 href={Path.app}
                 className={classes.menuItem}
                 >
-                Discode
+                Discord
             </Button>
             <div className={classes.bar}/>
             <Button 
@@ -264,7 +264,7 @@ const Header = ({color, subColor, sales}) => {
                 target="_blank"
                 className={classes.menuItem}
                 >
-                Opensea
+                OpenSea
             </Button>
             <div className={classes.bar}/>
             <Button 
@@ -272,12 +272,12 @@ const Header = ({color, subColor, sales}) => {
                 target="_blank"
                 className={classes.menuItem}
                 >
-                Discode
+                Discord
                 <FontAwesomeIcon className={classes.icon} icon={faDiscord} />
             </Button>
             <div className={classes.bar}/>
             <Button 
-                href="https://twitter.com/hibikilla30"
+                href="https://twitter.com/wagmi_music"
                 target="_blank"
                 className={classes.menuItem}
                 >
@@ -297,7 +297,8 @@ const Header = ({color, subColor, sales}) => {
                     >
                     <img
                         width={"100px"}
-                        src="/image/wagmi_logo_noshadow_350_350.png" alt="wagmi"
+                        src="/image/wagmi_logo_noshadow_350_350.png"
+                        alt="wagmi"
                         style={{objectFit: 'cover'}}
                         />
                 </Button>
@@ -350,12 +351,12 @@ const Header = ({color, subColor, sales}) => {
                             className={classes.customIcon}
                             style={{color: subColor}}
                             >
-                            Opensea
+                            OpenSea
                         </Button>
                     </Grid>
                     <Grid item className={classes.iconMargin}>
                         <Button
-                            href="https://twitter.com/hibikilla30"
+                            href="https://twitter.com/wagmi_music"
                             target="_blank"
                             className={classes.customIcon}
                             style={{color: subColor}}

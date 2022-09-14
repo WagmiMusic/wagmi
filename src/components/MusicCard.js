@@ -249,7 +249,7 @@ const MintButtons = ({tokenId, sales, checked, inStock}) => {
     }
 }
 
-const MusicCard = ({artist = "hibikilla", title = "LUNA",id, baseId=0, inStock, sales}) => {
+const MusicCard = ({artist = "Hibikilla", title = "LUNA",id, baseId=0, inStock, sales}) => {
     const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
     const tokenId = baseId+id;
     // console.log("tokenId",tokenId)
@@ -329,7 +329,7 @@ const MusicCard = ({artist = "hibikilla", title = "LUNA",id, baseId=0, inStock, 
                             target="_blank"
                             className={classes.customButton}
                             >
-                            Go Opensea
+                            Go OpenSea
                         </Button>
                     </div>
                 </Card>
@@ -420,7 +420,7 @@ const MusicCard = ({artist = "hibikilla", title = "LUNA",id, baseId=0, inStock, 
                             target="_blank"
                             className={classes.customButton}
                             >
-                            Go Opensea
+                            Go OpenSea
                         </Button>
                     </div>
                 </Card>
