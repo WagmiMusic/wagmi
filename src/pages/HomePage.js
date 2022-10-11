@@ -201,6 +201,7 @@ const useStyles = makeStyles({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
+        top: '-70%',
     },
     img: {
         width: 300,
